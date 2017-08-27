@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PetMobile.Helpers.Converters;assembly=PetMobile"
+             x:Class="PetMobile.Views.Owner.MainPage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             Title="Dashboard">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--<local:CountToVisibleConverter x:Key="CountToVisibleConverter" />-->
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"/>
+            <ListView ItemsSource="{Binding Pets, Mode=TwoWay}" HasUnevenRows="True" Margin="0,20,0,0" ItemTapped="Pets_ItemTapped">
+                <ListView.Header>
+                    <Label Text="Mascotas" Margin="16,0,0,16"/>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <controls:CircleImage Source="dog.png"
+                                                      WidthRequest="40" 
+                                                      HeightRequest="40" 
+                                                      Aspect="AspectFill"
+                                                      Margin="16,8,16,8"/>
+                                <Label Text="{Binding Fullname}" Grid.Column="1" Style="{StaticResource SimpleLineListItem}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

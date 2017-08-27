@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PetProjectDB" Class="SQLMappingDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=petproject.database.windows.net;Initial Catalog=petprojectdb;User ID=javieresc97" SettingsObjectName="PetProject.Entities.Properties.Settings" SettingsPropertyName="PetProjectDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Appointment" Member="Appointments">
+    <Type Name="Appointment">
+      <Column Name="idAppointment" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="appointmentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="idPet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="confirmed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Appointment_DetailAppointment" Member="DetailAppointments" ThisKey="idAppointment" OtherKey="idAppointment" Type="DetailAppointment" />
+      <Association Name="Pet_Appointment" Member="Pet" ThisKey="idPet" OtherKey="idPet" Type="Pet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Clinic" Member="Clinics">
+    <Type Name="Clinic">
+      <Column Name="idClinic" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RUC" Type="System.String" DbType="NVarChar(11)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="latitude" Type="System.Decimal" DbType="Decimal(9,6)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.Decimal" DbType="Decimal(9,6)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Association Name="Clinic_DetailAppointment" Member="DetailAppointments" AccessModifier="Internal" ThisKey="idClinic" OtherKey="idClinic" Type="DetailAppointment" />
+      <Association Name="Clinic_User" Member="Users" AccessModifier="Internal" ThisKey="idClinic" OtherKey="idClinic" Type="User" />
+      <Association Name="Clinic_DetailVetClinic" Member="DetailVetClinics" AccessModifier="Internal" ThisKey="idClinic" OtherKey="idClinic" Type="DetailVetClinic" />
+      <Association Name="Clinic_ClinicHistory" Member="ClinicHistories" AccessModifier="Internal" ThisKey="idClinic" OtherKey="idClinic" Type="ClinicHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetailAppointment" Member="DetailAppointments">
+    <Type Name="DetailAppointment">
+      <Column Name="idDetail" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idAppointment" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idClinic" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idVet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Appointment_DetailAppointment" Member="Appointment" AccessModifier="Internal" ThisKey="idAppointment" OtherKey="idAppointment" Type="Appointment" IsForeignKey="true" />
+      <Association Name="Clinic_DetailAppointment" Member="Clinic" ThisKey="idClinic" OtherKey="idClinic" Type="Clinic" IsForeignKey="true" />
+      <Association Name="Vet_DetailAppointment" Member="Vet" ThisKey="idVet" OtherKey="idVet" Type="Vet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Disease" Member="Diseases">
+    <Type Name="Disease">
+      <Column Name="idDesease" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idPet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="diagnosticDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Pet_Disease" Member="Pet" AccessModifier="Internal" ThisKey="idPet" OtherKey="idPet" Type="Pet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Owner" Member="Owners">
+    <Type Name="Owner">
+      <Column Name="idOwner" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="firstname" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="lastname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Association Name="Owner_Pet" Member="Pets" AccessModifier="Internal" ThisKey="idOwner" OtherKey="idOwner" Type="Pet" />
+      <Association Name="Owner_User" Member="Users" AccessModifier="Internal" ThisKey="idOwner" OtherKey="idPetOwner" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pet" Member="Pets">
+    <Type Name="Pet">
+      <Column Name="idPet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="firstname" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="lastname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="idOwner" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="breed" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="color" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Association Name="Pet_Appointment" Member="Appointments" AccessModifier="Internal" ThisKey="idPet" OtherKey="idPet" Type="Appointment" />
+      <Association Name="Pet_Disease" Member="Diseases" ThisKey="idPet" OtherKey="idPet" Type="Disease" />
+      <Association Name="Pet_Vaccination" Member="Vaccinations" ThisKey="idPet" OtherKey="idPet" Type="Vaccination" />
+      <Association Name="Pet_ClinicHistory" Member="ClinicHistories" AccessModifier="Internal" ThisKey="idPet" OtherKey="idPet" Type="ClinicHistory" />
+      <Association Name="Owner_Pet" Member="Owner" ThisKey="idOwner" OtherKey="idOwner" Type="Owner" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="guid" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="emailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="idClinic" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idVet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idPetOwner" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Clinic_User" Member="Clinic" ThisKey="idClinic" OtherKey="idClinic" Type="Clinic" IsForeignKey="true" />
+      <Association Name="Owner_User" Member="Owner" ThisKey="idPetOwner" OtherKey="idOwner" Type="Owner" IsForeignKey="true" />
+      <Association Name="Vet_User" Member="Vet" ThisKey="idVet" OtherKey="idVet" Type="Vet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vaccination" Member="Vaccinations">
+    <Type Name="Vaccination">
+      <Column Name="idVaccination" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idPet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="laboratoryName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="vaccinationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Pet_Vaccination" Member="Pet" AccessModifier="Internal" ThisKey="idPet" OtherKey="idPet" Type="Pet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetailVetClinic" Member="DetailVetClinics">
+    <Type Name="DetailVetClinic">
+      <Column Name="idDetail" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idClinic" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idVet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="startDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="endDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Clinic_DetailVetClinic" Member="Clinic" ThisKey="idClinic" OtherKey="idClinic" Type="Clinic" IsForeignKey="true" />
+      <Association Name="Vet_DetailVetClinic" Member="Vet" ThisKey="idVet" OtherKey="idVet" Type="Vet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vet" Member="Vets">
+    <Type Name="Vet">
+      <Column Name="idVet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="firstname" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="lastname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="RUC" Type="System.String" DbType="NVarChar(11)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="licenseDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="licenseCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="latitude" Type="System.Decimal" DbType="Decimal(9,6)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.Decimal" DbType="Decimal(9,6)" CanBeNull="true" />
+      <Association Name="Vet_DetailAppointment" Member="DetailAppointments" AccessModifier="Internal" ThisKey="idVet" OtherKey="idVet" Type="DetailAppointment" />
+      <Association Name="Vet_User" Member="Users" AccessModifier="Internal" ThisKey="idVet" OtherKey="idVet" Type="User" />
+      <Association Name="Vet_DetailVetClinic" Member="DetailVetClinics" AccessModifier="Internal" ThisKey="idVet" OtherKey="idVet" Type="DetailVetClinic" />
+      <Association Name="Vet_ClinicHistory" Member="ClinicHistories" AccessModifier="Internal" ThisKey="idVet" OtherKey="idVet" Type="ClinicHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Test" Member="Tests">
+    <Type Name="Test">
+      <Column Name="idTest" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="testDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="decription" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="source" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="idHistory" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ClinicHistory_Test" Member="ClinicHistory" AccessModifier="Internal" ThisKey="idHistory" OtherKey="idHistory" Type="ClinicHistory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClinicHistory" Member="ClinicHistories">
+    <Type Name="ClinicHistory">
+      <Column Name="idHistory" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="clinicalSign" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="anamnesis" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="treatment" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="observations" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="diagnostic" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="arrivalDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="dischargeDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="idPet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idVet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idClinic" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ClinicHistory_Test" Member="Tests" ThisKey="idHistory" OtherKey="idHistory" Type="Test" />
+      <Association Name="Clinic_ClinicHistory" Member="Clinic" ThisKey="idClinic" OtherKey="idClinic" Type="Clinic" IsForeignKey="true" />
+      <Association Name="Pet_ClinicHistory" Member="Pet" ThisKey="idPet" OtherKey="idPet" Type="Pet" IsForeignKey="true" />
+      <Association Name="Vet_ClinicHistory" Member="Vet" ThisKey="idVet" OtherKey="idVet" Type="Vet" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

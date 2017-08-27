@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PetMobile.Views.Owner.ShellPageMaster"
+             Title="Master">
+    <StackLayout>
+        <ListView x:Name="MenuItemsListView"
+              SeparatorVisibility="None"
+              HasUnevenRows="true"
+              ItemsSource="{Binding MenuItems}">
+            <ListView.Header>
+                <Grid BackgroundColor="{StaticResource colorPrimaryDark}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="56"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Profile image -->
+                    <Image Grid.Row="0"
+                           VerticalOptions="End"
+                           HorizontalOptions="Start"
+                           HeightRequest="120"
+                           Aspect="AspectFit"
+                           Margin="16,40,0,4"/>
+                    
+                    <!-- Title and subtitle -->
+                    <StackLayout Grid.Row="1" Spacing="0" Margin="16,0">
+                        <Label Text="{Binding Session.Owner.Fullname}"
+                               FontSize="16"
+                               TextColor="White" />
+                        <Label Text="Dueño de mascota"
+                               TextColor="LightGray"
+                               FontSize="14" />
+                    </StackLayout>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="16,10" HorizontalOptions="FillAndExpand" Spacing="0">
+                            <Label VerticalOptions="FillAndExpand" 
+                                   VerticalTextAlignment="Center" 
+                                   Text="{Binding Title}" 
+                                   Style="{StaticResource NavigationItemText}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

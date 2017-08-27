@@ -1,0 +1,53 @@
+﻿@model IEnumerable<PetApiClient.Appointment>
+
+<h2>Citas por confirmar</h2>
+
+@if (Model.Any())
+{
+<table class="table">
+    <tr>
+        <th>
+            Código
+        </th>
+        <th>
+            Fecha propuesta
+        </th>
+        <th>
+            Título
+        </th>
+        <th>
+            Mascota
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAppointment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pet.Fullname)
+            </td>
+            <td>
+                @Html.ActionLink("Confirmar", "Confirm", "Vet", new { id = item.IdAppointment }, new { }) |
+                @Html.ActionLink("Cambiar fecha", "Details", new { id = item.IdAppointment }) |
+                @Html.ActionLink("Rechazar", "Delete", new { id = item.IdAppointment })
+            </td>
+        </tr>
+    }
+
+</table>
+}
+else
+{
+    <h3><label class="alert-info">No tienes citas por confirmar</label></h3>
+}
+@Html.ActionLink("Regresar", "Index", "Vet")

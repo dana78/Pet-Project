@@ -1,0 +1,98 @@
+﻿@model PetApiClient.Vet
+
+@{
+    ViewBag.Title = $"{Model.Firstname} {Model.Lastname}";
+}
+
+<div>
+    <h1>@($"{Model.Firstname} {Model.Lastname}")</h1>
+    <h4>@($"Código: {Model.IdVet}")</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            RUC
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RUC)
+        </dd>
+
+        <dt>
+            Teléfono
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            Fecha de colegiatura
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LicenseDate)
+        </dd>
+
+        <dt>
+            Código de colegiatura
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LicenseCode)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { /* id = Model.PrimaryKey */ })
+    </p>
+    <br />
+
+    @if (Model.Appointments.Any())
+    {
+
+        <h3>Citas confirmadas</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Título
+                </th>
+                <th>
+                    Mascota
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Appointments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdAppointment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppointmentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pet.Fullname)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Atender", "Details", "Appointment", new { id = item.IdAppointment }, new { })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h3><label class="alert-info">No tienes citas pendientes</label></h3>
+    }
+</div>

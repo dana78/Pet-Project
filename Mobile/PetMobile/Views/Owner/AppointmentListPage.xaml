@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PetMobile.Views.Owner.AppointmentListPage">
+    <ListView ItemsSource="{Binding Appointments}"
+              HasUnevenRows="True"
+              ItemTapped="Handle_ItemTapped"
+              CachingStrategy="RecycleElement">
+        <ListView.Header>
+            <Label Text="Citas" Margin="16,0,0,16"/>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="16,0">
+                        <Label Text="{Binding IdAppointment, StringFormat='Código: {0:N}'}" />
+                        <Label Text="{Binding Title}" />
+                        <Label Text="{Binding Pet.Fullname}" />
+                        <Label Text="{Binding AppointmentDate}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
