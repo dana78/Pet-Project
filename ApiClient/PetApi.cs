@@ -18,10 +18,10 @@ namespace PetApiClient.Services
         private PetApi() { }
         #endregion
 
-        public async Task RegisterNewUser(Credentials newUser)
+        public async Task<int> RegisterNewUser(Credentials newUser)
         {
             var relativeUri = Constants.UriUsers;
-            await PostApiAsync(relativeUri, newUser.ToJson());
+            return await PostApiAsync<int>(relativeUri, newUser.ToJson());
         }
 
         public async Task<RequestResult<UserRoleInfo>> Login(Credentials userCredentials)
@@ -112,6 +112,16 @@ namespace PetApiClient.Services
         public async Task<List<ClinicHistory>> GetPetClinicHistories(int petId)
         {
             return await GetApiAsync<List<ClinicHistory>>($"pets/{petId}/histories");
+        }
+
+        public async Task<Vet> PostVet(VetRM vet)
+        {
+            return await PostApiAsync<Vet>("vets", vet);
+        }
+
+        public async Task AttendAppointment(int id)
+        {
+            await PutApiAsync($"appointments/{id}/attend", string.Empty);
         }
     }
 }

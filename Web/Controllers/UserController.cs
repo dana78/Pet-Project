@@ -1,5 +1,6 @@
 ﻿using PetApiClient;
 using PetApiClient.Services;
+using PetProject.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,5 +38,15 @@ namespace PetProject.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Register(VetRegister vetRegister)
+        {
+            int userId = await PetApi.Instance.RegisterNewUser(new Credentials(vetRegister.Email, vetRegister.Password));
+            VetRM castedVet = vetRegister;
+            castedVet.UserId = userId;
+            await PetApi.Instance.PostVet(castedVet);
+
+            return RedirectToAction("Login");
+        }
     }
 }

@@ -90,6 +90,13 @@ namespace PetProject.API.Controllers
             }
         }
 
+        //[HttpPut]
+        //[Route("api/vets/{id}")]
+        //public IHttpActionResult PutVetProfile([FromBody] VetRM vet)
+        //{
+            
+        //}
+
 
         /// <summary>
         /// Returns a list of appointments

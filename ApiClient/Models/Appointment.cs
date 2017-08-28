@@ -71,6 +71,11 @@ namespace PetApiClient
         [DataMember(Name="confirmed", EmitDefaultValue=false)]
         public bool? Confirmed { get; set; }
         /// <summary>
+        /// Gets or Sets Confirmed
+        /// </summary>
+        [DataMember(Name = "attended", EmitDefaultValue = false)]
+        public bool? Attended { get; set; }
+        /// <summary>
         /// Gets or Sets DetailAppointments
         /// </summary>
         [DataMember(Name="DetailAppointments", EmitDefaultValue=false)]

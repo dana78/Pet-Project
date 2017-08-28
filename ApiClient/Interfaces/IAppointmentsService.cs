@@ -14,5 +14,6 @@ namespace PetApiClient.Interfaces
         Task<Appointment> PostAppointment(AppointmentRM appointment);
         Task<Appointment> GetAppointment(int id);
         Task ConfirmAppointment(int id);
+        Task AttendAppointment(int id);
     }
 }

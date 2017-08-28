@@ -31,7 +31,14 @@ namespace PetProject.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Save(ClinicHistoryRM history)
         {
+            var appId = Session["AppId"] as int?;
+            if (appId == null || !appId.HasValue)//TODO: Solve it smarter
+                throw new Exception("Hubo un error");
+
             var postedHistory = await PetApi.Instance.PostClinicHistory(history);
+            await PetApi.Instance.AttendAppointment(appId.Value);
+            Session.Remove("AppId");
+
             return RedirectToAction("Index", "Vet");
         }
     }

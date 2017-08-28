@@ -21,9 +21,10 @@ namespace PetProject.API.Controllers
         /// Creates a new user
         /// </summary>
         /// <param name="user">User</param>
-        /// <returns></returns>
+        /// <returns>New user id</returns>
         [HttpPost]
         [Route("api/users")]
+        [ResponseType(typeof(int))]
         public IHttpActionResult Post([FromBody]Credentials user)
         {
             if (!ModelState.IsValid)
@@ -40,7 +41,7 @@ namespace PetProject.API.Controllers
                 context.Users.InsertOnSubmit(newUser);
                 context.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
 
-                return Ok();
+                return Ok(newUser.idUser);
             }
             catch(Exception e)
             {

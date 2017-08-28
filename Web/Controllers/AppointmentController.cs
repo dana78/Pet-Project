@@ -23,6 +23,7 @@ namespace PetProject.Web.Controllers
             {
                 return HttpNotFound("La cita no ha sido encontrada");
             }
+            Session["AppId"] = appointment.IdAppointment;
             return View(appointment);
         }
     }

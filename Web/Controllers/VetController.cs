@@ -20,7 +20,7 @@ namespace PetProject.Web.Controllers
                 return RedirectToAction("Login", "User");
 
             var allAppointments = await PetApi.Instance.GetVetAppointments(vet.IdVet.Value);
-            vet.Appointments = allAppointments.Where(a => a.Confirmed == true);
+            vet.Appointments = allAppointments.Where(a => a.Confirmed.GetValueOrDefault() && !a.Attended.GetValueOrDefault());
             return View(vet);
         }
 
@@ -49,6 +49,20 @@ namespace PetProject.Web.Controllers
             return View(filtered);
         }
 
+        //public async Task<ActionResult> Edit()
+        //{
+        //    var vet = Session["Vet"] as Vet;
+        //    if (vet == null)
+        //        return RedirectToAction("Login", "User");
+
+        //    return View(vet);
+        //}
+
+        //public async Task<ActionResult> Edit(Vet vet)
+        //{
+        //    //await PetApi.Instance.
+        //    return RedirectToAction("Index", "Vet");
+        //}
 
         public ActionResult Logout()
         {

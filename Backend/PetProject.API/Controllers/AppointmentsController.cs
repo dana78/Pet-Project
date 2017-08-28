@@ -131,7 +131,7 @@ namespace PetProject.API.Controllers
         /// <param name="date">New date</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("api/appointments/{id}/ChangeDate")]
+        [Route("api/appointments/{id}/date")]
         public IHttpActionResult ChangeDate(int id, DateTime date)
         {
             try
@@ -140,6 +140,31 @@ namespace PetProject.API.Controllers
                 if (appointment == null) return NotFound();
 
                 appointment.appointmentDate = date;
+                context.SubmitChanges();
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+        /// <summary>
+        /// Changes the 'attended' state from the given appointment
+        /// </summary>
+        /// <param name="id">Appointment id</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/appointments/{id}/attend")]
+        public IHttpActionResult Attend(int id)
+        {
+            try
+            {
+                var appointment = context.Appointments.FirstOrDefault(a => a.idAppointment == id);
+                if (appointment == null) return NotFound();
+
+                appointment.attended = true;
                 context.SubmitChanges();
 
                 return Ok();

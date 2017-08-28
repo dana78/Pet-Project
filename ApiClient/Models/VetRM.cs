@@ -33,51 +33,7 @@ namespace PetApiClient
         /// Initializes a new instance of the <see cref="VetRM" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected VetRM() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VetRM" /> class.
-        /// </summary>
-        /// <param name="UserId">UserId (required).</param>
-        /// <param name="Firstname">Firstname (required).</param>
-        /// <param name="Lastname">Lastname (required).</param>
-        /// <param name="RUC">RUC.</param>
-        /// <param name="Phone">Phone.</param>
-        /// <param name="LicenseCode">LicenseCode.</param>
-        /// <param name="LicenseDate">LicenseDate.</param>
-        public VetRM(int? UserId = default(int?), string Firstname = default(string), string Lastname = default(string), string RUC = default(string), string Phone = default(string), string LicenseCode = default(string), DateTime? LicenseDate = default(DateTime?))
-        {
-            // to ensure "UserId" is required (not null)
-            if (UserId == null)
-            {
-                throw new InvalidDataException("UserId is a required property for VetRM and cannot be null");
-            }
-            else
-            {
-                this.UserId = UserId;
-            }
-            // to ensure "Firstname" is required (not null)
-            if (Firstname == null)
-            {
-                throw new InvalidDataException("Firstname is a required property for VetRM and cannot be null");
-            }
-            else
-            {
-                this.Firstname = Firstname;
-            }
-            // to ensure "Lastname" is required (not null)
-            if (Lastname == null)
-            {
-                throw new InvalidDataException("Lastname is a required property for VetRM and cannot be null");
-            }
-            else
-            {
-                this.Lastname = Lastname;
-            }
-            this.RUC = RUC;
-            this.Phone = Phone;
-            this.LicenseCode = LicenseCode;
-            this.LicenseDate = LicenseDate;
-        }
+        protected VetRM() { }        
         
         /// <summary>
         /// Gets or Sets UserId

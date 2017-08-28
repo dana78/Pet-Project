@@ -28,32 +28,7 @@ namespace PetApiClient
     /// </summary>
     [DataContract]
     public partial class Vet :  IEquatable<Vet>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Vet" /> class.
-        /// </summary>
-        /// <param name="IdVet">IdVet.</param>
-        /// <param name="Firstname">Firstname.</param>
-        /// <param name="Lastname">Lastname.</param>
-        /// <param name="RUC">RUC.</param>
-        /// <param name="Phone">Phone.</param>
-        /// <param name="LicenseDate">LicenseDate.</param>
-        /// <param name="LicenseCode">LicenseCode.</param>
-        /// <param name="Latitude">Latitude.</param>
-        /// <param name="Longitude">Longitude.</param>
-        public Vet(int? IdVet = default(int?), string Firstname = default(string), string Lastname = default(string), string RUC = default(string), string Phone = default(string), DateTime? LicenseDate = default(DateTime?), string LicenseCode = default(string), double? Latitude = default(double?), double? Longitude = default(double?))
-        {
-            this.IdVet = IdVet;
-            this.Firstname = Firstname;
-            this.Lastname = Lastname;
-            this.RUC = RUC;
-            this.Phone = Phone;
-            this.LicenseDate = LicenseDate;
-            this.LicenseCode = LicenseCode;
-            this.Latitude = Latitude;
-            this.Longitude = Longitude;
-        }
-        
+    {        
         /// <summary>
         /// Gets or Sets IdVet
         /// </summary>

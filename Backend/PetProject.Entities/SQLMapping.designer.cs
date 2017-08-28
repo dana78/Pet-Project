@@ -22,7 +22,7 @@ namespace PetProject.Entities
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="PetProjectDB")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="petprojectdb")]
 	public partial class SQLMappingDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,9 +30,6 @@ namespace PetProject.Entities
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAppointment(Appointment instance);
-    partial void UpdateAppointment(Appointment instance);
-    partial void DeleteAppointment(Appointment instance);
     partial void InsertClinic(Clinic instance);
     partial void UpdateClinic(Clinic instance);
     partial void DeleteClinic(Clinic instance);
@@ -66,6 +63,9 @@ namespace PetProject.Entities
     partial void InsertClinicHistory(ClinicHistory instance);
     partial void UpdateClinicHistory(ClinicHistory instance);
     partial void DeleteClinicHistory(ClinicHistory instance);
+    partial void InsertAppointment(Appointment instance);
+    partial void UpdateAppointment(Appointment instance);
+    partial void DeleteAppointment(Appointment instance);
     #endregion
 		
 		public SQLMappingDataContext() : 
@@ -96,14 +96,6 @@ namespace PetProject.Entities
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Appointment> Appointments
-		{
-			get
-			{
-				return this.GetTable<Appointment>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Clinic> Clinics
@@ -193,232 +185,13 @@ namespace PetProject.Entities
 				return this.GetTable<ClinicHistory>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Appointment")]
-	public partial class Appointment : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idAppointment;
-		
-		private System.Nullable<System.DateTime> _appointmentDate;
-		
-		private string _title;
-		
-		private System.Nullable<int> _idPet;
-		
-		private System.Nullable<bool> _confirmed;
-		
-		private EntitySet<DetailAppointment> _DetailAppointments;
-		
-		private EntityRef<Pet> _Pet;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidAppointmentChanging(int value);
-    partial void OnidAppointmentChanged();
-    partial void OnappointmentDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnappointmentDateChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OnidPetChanging(System.Nullable<int> value);
-    partial void OnidPetChanged();
-    partial void OnconfirmedChanging(System.Nullable<bool> value);
-    partial void OnconfirmedChanged();
-    #endregion
-		
-		public Appointment()
-		{
-			this._DetailAppointments = new EntitySet<DetailAppointment>(new Action<DetailAppointment>(this.attach_DetailAppointments), new Action<DetailAppointment>(this.detach_DetailAppointments));
-			this._Pet = default(EntityRef<Pet>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAppointment", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idAppointment
+		public System.Data.Linq.Table<Appointment> Appointments
 		{
 			get
 			{
-				return this._idAppointment;
+				return this.GetTable<Appointment>();
 			}
-			set
-			{
-				if ((this._idAppointment != value))
-				{
-					this.OnidAppointmentChanging(value);
-					this.SendPropertyChanging();
-					this._idAppointment = value;
-					this.SendPropertyChanged("idAppointment");
-					this.OnidAppointmentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_appointmentDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> appointmentDate
-		{
-			get
-			{
-				return this._appointmentDate;
-			}
-			set
-			{
-				if ((this._appointmentDate != value))
-				{
-					this.OnappointmentDateChanging(value);
-					this.SendPropertyChanging();
-					this._appointmentDate = value;
-					this.SendPropertyChanged("appointmentDate");
-					this.OnappointmentDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(30)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPet", DbType="Int")]
-		public System.Nullable<int> idPet
-		{
-			get
-			{
-				return this._idPet;
-			}
-			set
-			{
-				if ((this._idPet != value))
-				{
-					if (this._Pet.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidPetChanging(value);
-					this.SendPropertyChanging();
-					this._idPet = value;
-					this.SendPropertyChanged("idPet");
-					this.OnidPetChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_confirmed", DbType="Bit")]
-		public System.Nullable<bool> confirmed
-		{
-			get
-			{
-				return this._confirmed;
-			}
-			set
-			{
-				if ((this._confirmed != value))
-				{
-					this.OnconfirmedChanging(value);
-					this.SendPropertyChanging();
-					this._confirmed = value;
-					this.SendPropertyChanged("confirmed");
-					this.OnconfirmedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment_DetailAppointment", Storage="_DetailAppointments", ThisKey="idAppointment", OtherKey="idAppointment")]
-		public EntitySet<DetailAppointment> DetailAppointments
-		{
-			get
-			{
-				return this._DetailAppointments;
-			}
-			set
-			{
-				this._DetailAppointments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment", Storage="_Pet", ThisKey="idPet", OtherKey="idPet", IsForeignKey=true)]
-		public Pet Pet
-		{
-			get
-			{
-				return this._Pet.Entity;
-			}
-			set
-			{
-				Pet previousValue = this._Pet.Entity;
-				if (((previousValue != value) 
-							|| (this._Pet.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pet.Entity = null;
-						previousValue.Appointments.Remove(this);
-					}
-					this._Pet.Entity = value;
-					if ((value != null))
-					{
-						value.Appointments.Add(this);
-						this._idPet = value.idPet;
-					}
-					else
-					{
-						this._idPet = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Pet");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_DetailAppointments(DetailAppointment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Appointment = this;
-		}
-		
-		private void detach_DetailAppointments(DetailAppointment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Appointment = null;
 		}
 	}
 	
@@ -754,11 +527,11 @@ namespace PetProject.Entities
 		
 		private System.Nullable<int> _idVet;
 		
-		private EntityRef<Appointment> _Appointment;
-		
 		private EntityRef<Clinic> _Clinic;
 		
 		private EntityRef<Vet> _Vet;
+		
+		private EntityRef<Appointment> _Appointment;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -776,9 +549,9 @@ namespace PetProject.Entities
 		
 		public DetailAppointment()
 		{
-			this._Appointment = default(EntityRef<Appointment>);
 			this._Clinic = default(EntityRef<Clinic>);
 			this._Vet = default(EntityRef<Vet>);
+			this._Appointment = default(EntityRef<Appointment>);
 			OnCreated();
 		}
 		
@@ -874,40 +647,6 @@ namespace PetProject.Entities
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment_DetailAppointment", Storage="_Appointment", ThisKey="idAppointment", OtherKey="idAppointment", IsForeignKey=true)]
-		internal Appointment Appointment
-		{
-			get
-			{
-				return this._Appointment.Entity;
-			}
-			set
-			{
-				Appointment previousValue = this._Appointment.Entity;
-				if (((previousValue != value) 
-							|| (this._Appointment.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Appointment.Entity = null;
-						previousValue.DetailAppointments.Remove(this);
-					}
-					this._Appointment.Entity = value;
-					if ((value != null))
-					{
-						value.DetailAppointments.Add(this);
-						this._idAppointment = value.idAppointment;
-					}
-					else
-					{
-						this._idAppointment = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Appointment");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Clinic_DetailAppointment", Storage="_Clinic", ThisKey="idClinic", OtherKey="idClinic", IsForeignKey=true)]
 		public Clinic Clinic
 		{
@@ -972,6 +711,40 @@ namespace PetProject.Entities
 						this._idVet = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Vet");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment1_DetailAppointment", Storage="_Appointment", ThisKey="idAppointment", OtherKey="idAppointment", IsForeignKey=true)]
+		internal Appointment Appointment
+		{
+			get
+			{
+				return this._Appointment.Entity;
+			}
+			set
+			{
+				Appointment previousValue = this._Appointment.Entity;
+				if (((previousValue != value) 
+							|| (this._Appointment.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Appointment.Entity = null;
+						previousValue.DetailAppointments.Remove(this);
+					}
+					this._Appointment.Entity = value;
+					if ((value != null))
+					{
+						value.DetailAppointments.Add(this);
+						this._idAppointment = value.idAppointment;
+					}
+					else
+					{
+						this._idAppointment = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Appointment");
 				}
 			}
 		}
@@ -1406,13 +1179,13 @@ namespace PetProject.Entities
 		
 		private string _color;
 		
-		private EntitySet<Appointment> _Appointments;
-		
 		private EntitySet<Disease> _Diseases;
 		
 		private EntitySet<Vaccination> _Vaccinations;
 		
 		private EntitySet<ClinicHistory> _ClinicHistories;
+		
+		private EntitySet<Appointment> _Appointments;
 		
 		private EntityRef<Owner> _Owner;
 		
@@ -1438,10 +1211,10 @@ namespace PetProject.Entities
 		
 		public Pet()
 		{
-			this._Appointments = new EntitySet<Appointment>(new Action<Appointment>(this.attach_Appointments), new Action<Appointment>(this.detach_Appointments));
 			this._Diseases = new EntitySet<Disease>(new Action<Disease>(this.attach_Diseases), new Action<Disease>(this.detach_Diseases));
 			this._Vaccinations = new EntitySet<Vaccination>(new Action<Vaccination>(this.attach_Vaccinations), new Action<Vaccination>(this.detach_Vaccinations));
 			this._ClinicHistories = new EntitySet<ClinicHistory>(new Action<ClinicHistory>(this.attach_ClinicHistories), new Action<ClinicHistory>(this.detach_ClinicHistories));
+			this._Appointments = new EntitySet<Appointment>(new Action<Appointment>(this.attach_Appointments), new Action<Appointment>(this.detach_Appointments));
 			this._Owner = default(EntityRef<Owner>);
 			OnCreated();
 		}
@@ -1590,19 +1363,6 @@ namespace PetProject.Entities
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment", Storage="_Appointments", ThisKey="idPet", OtherKey="idPet")]
-		internal EntitySet<Appointment> Appointments
-		{
-			get
-			{
-				return this._Appointments;
-			}
-			set
-			{
-				this._Appointments.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Disease", Storage="_Diseases", ThisKey="idPet", OtherKey="idPet")]
 		public EntitySet<Disease> Diseases
 		{
@@ -1639,6 +1399,19 @@ namespace PetProject.Entities
 			set
 			{
 				this._ClinicHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment1", Storage="_Appointments", ThisKey="idPet", OtherKey="idPet")]
+		internal EntitySet<Appointment> Appointments
+		{
+			get
+			{
+				return this._Appointments;
+			}
+			set
+			{
+				this._Appointments.Assign(value);
 			}
 		}
 		
@@ -1696,18 +1469,6 @@ namespace PetProject.Entities
 			}
 		}
 		
-		private void attach_Appointments(Appointment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pet = this;
-		}
-		
-		private void detach_Appointments(Appointment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pet = null;
-		}
-		
 		private void attach_Diseases(Disease entity)
 		{
 			this.SendPropertyChanging();
@@ -1739,6 +1500,18 @@ namespace PetProject.Entities
 		}
 		
 		private void detach_ClinicHistories(ClinicHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pet = null;
+		}
+		
+		private void attach_Appointments(Appointment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pet = this;
+		}
+		
+		private void detach_Appointments(Appointment entity)
 		{
 			this.SendPropertyChanging();
 			entity.Pet = null;
@@ -3576,6 +3349,257 @@ namespace PetProject.Entities
 		{
 			this.SendPropertyChanging();
 			entity.ClinicHistory = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Appointment")]
+	public partial class Appointment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idAppointment;
+		
+		private System.Nullable<System.DateTime> _appointmentDate;
+		
+		private string _title;
+		
+		private System.Nullable<int> _idPet;
+		
+		private System.Nullable<bool> _confirmed;
+		
+		private System.Nullable<bool> _attended;
+		
+		private EntitySet<DetailAppointment> _DetailAppointments;
+		
+		private EntityRef<Pet> _Pet;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidAppointmentChanging(int value);
+    partial void OnidAppointmentChanged();
+    partial void OnappointmentDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnappointmentDateChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnidPetChanging(System.Nullable<int> value);
+    partial void OnidPetChanged();
+    partial void OnconfirmedChanging(System.Nullable<bool> value);
+    partial void OnconfirmedChanged();
+    partial void OnattendedChanging(System.Nullable<bool> value);
+    partial void OnattendedChanged();
+    #endregion
+		
+		public Appointment()
+		{
+			this._DetailAppointments = new EntitySet<DetailAppointment>(new Action<DetailAppointment>(this.attach_DetailAppointments), new Action<DetailAppointment>(this.detach_DetailAppointments));
+			this._Pet = default(EntityRef<Pet>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAppointment", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idAppointment
+		{
+			get
+			{
+				return this._idAppointment;
+			}
+			set
+			{
+				if ((this._idAppointment != value))
+				{
+					this.OnidAppointmentChanging(value);
+					this.SendPropertyChanging();
+					this._idAppointment = value;
+					this.SendPropertyChanged("idAppointment");
+					this.OnidAppointmentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_appointmentDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> appointmentDate
+		{
+			get
+			{
+				return this._appointmentDate;
+			}
+			set
+			{
+				if ((this._appointmentDate != value))
+				{
+					this.OnappointmentDateChanging(value);
+					this.SendPropertyChanging();
+					this._appointmentDate = value;
+					this.SendPropertyChanged("appointmentDate");
+					this.OnappointmentDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(30)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPet", DbType="Int")]
+		public System.Nullable<int> idPet
+		{
+			get
+			{
+				return this._idPet;
+			}
+			set
+			{
+				if ((this._idPet != value))
+				{
+					if (this._Pet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidPetChanging(value);
+					this.SendPropertyChanging();
+					this._idPet = value;
+					this.SendPropertyChanged("idPet");
+					this.OnidPetChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_confirmed", DbType="Bit")]
+		public System.Nullable<bool> confirmed
+		{
+			get
+			{
+				return this._confirmed;
+			}
+			set
+			{
+				if ((this._confirmed != value))
+				{
+					this.OnconfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._confirmed = value;
+					this.SendPropertyChanged("confirmed");
+					this.OnconfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attended", DbType="Bit")]
+		public System.Nullable<bool> attended
+		{
+			get
+			{
+				return this._attended;
+			}
+			set
+			{
+				if ((this._attended != value))
+				{
+					this.OnattendedChanging(value);
+					this.SendPropertyChanging();
+					this._attended = value;
+					this.SendPropertyChanged("attended");
+					this.OnattendedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment1_DetailAppointment", Storage="_DetailAppointments", ThisKey="idAppointment", OtherKey="idAppointment")]
+		public EntitySet<DetailAppointment> DetailAppointments
+		{
+			get
+			{
+				return this._DetailAppointments;
+			}
+			set
+			{
+				this._DetailAppointments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment1", Storage="_Pet", ThisKey="idPet", OtherKey="idPet", IsForeignKey=true)]
+		public Pet Pet
+		{
+			get
+			{
+				return this._Pet.Entity;
+			}
+			set
+			{
+				Pet previousValue = this._Pet.Entity;
+				if (((previousValue != value) 
+							|| (this._Pet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Pet.Entity = null;
+						previousValue.Appointments.Remove(this);
+					}
+					this._Pet.Entity = value;
+					if ((value != null))
+					{
+						value.Appointments.Add(this);
+						this._idPet = value.idPet;
+					}
+					else
+					{
+						this._idPet = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Pet");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_DetailAppointments(DetailAppointment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Appointment = this;
+		}
+		
+		private void detach_DetailAppointments(DetailAppointment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Appointment = null;
 		}
 	}
 }
