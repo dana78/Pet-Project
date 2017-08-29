@@ -75,6 +75,41 @@ namespace PetProject.API.Controllers
 
 
         /// <summary>
+        /// Updates pet info
+        /// </summary>
+        /// <param name="pet"></param>
+        /// <returns>New pet info</returns>
+        [HttpPut]
+        [Route("api/pets")]
+        [ResponseType(typeof(Pet))]
+        public IHttpActionResult UpdatePet(Pet pet)
+        {
+            if (!ModelState.IsValid || pet == null)
+                return BadRequest();
+
+            try
+            {
+                var petFound = db.Pets.FirstOrDefault(p => p.idPet == pet.idPet);
+                if (petFound == null)
+                    return NotFound();
+
+                petFound.firstname = pet.firstname;
+                petFound.lastname = pet.lastname;
+                petFound.breed = pet.breed;
+                petFound.color = pet.color;
+                petFound.birthday = pet.birthday;
+
+                db.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
+                return Ok(petFound);
+            }
+            catch(Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+
+        /// <summary>
         /// Returns the list of clinic histories within the given pet id
         /// </summary>
         /// <param name="petId">Pet id</param>

@@ -79,6 +79,7 @@ namespace PetProject.API.Controllers
                 using (context.Transaction = context.Connection.BeginTransaction())
                 {
                     Appointment newAppointment = MapAppointmentFromRM(appointment);
+                    newAppointment.attended = false;
                     context.Appointments.InsertOnSubmit(newAppointment);
                     context.SubmitChanges(ConflictMode.FailOnFirstConflict);
 
