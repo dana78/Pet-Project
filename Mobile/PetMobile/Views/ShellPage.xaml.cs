@@ -1,10 +1,11 @@
-﻿using PetMobile.ViewModels;
+﻿using PetMobile.Helpers;
+using PetMobile.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PetMobile.Views.Owner
+namespace PetMobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShellPage : MasterDetailPage

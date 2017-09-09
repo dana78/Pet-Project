@@ -77,10 +77,17 @@ namespace PetApiClient
 
         [JsonIgnore]
         public IEnumerable<Appointment> Appointments { get; set; }
+
+        [JsonIgnore]
+        public string Fullname
+        {
+            get { return $"{Firstname} {Lastname}".Trim(); }
+        }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
+        /// 
         public override string ToString()
         {
             //var sb = new StringBuilder();

@@ -13,7 +13,7 @@ namespace PetProject.API.Controllers
     /// </summary>
     public class VetsController : ApiController
     {
-        SQLMappingDataContext context = new SQLMappingDataContext();
+        SQLMappingDataContext db = new SQLMappingDataContext();
 
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace PetProject.API.Controllers
         {
             try
             {
-                var vetFound = context.Vets.FirstOrDefault(v => v.idVet == id);
+                var vetFound = db.Vets.FirstOrDefault(v => v.idVet == id);
                 if (vetFound == null)
                     return NotFound();
 
@@ -54,37 +54,37 @@ namespace PetProject.API.Controllers
             if (!ModelState.IsValid || vet == null)
                 return BadRequest();
 
-            context.Connection.Open();
-            using (context.Transaction = context.Connection.BeginTransaction())
+            db.Connection.Open();
+            using (db.Transaction = db.Connection.BeginTransaction())
             {
                 try
                 {
                     //  Check if user exists
-                    var user = context.Users.FirstOrDefault(u => u.idUser == vet.UserId);
+                    var user = db.Users.FirstOrDefault(u => u.idUser == vet.UserId);
                     if (user == null)
                     {
-                        context.Transaction.Rollback();
+                        db.Transaction.Rollback();
                         return NotFound();
                     }
 
                     //  Insert new vet
                     Vet newVet = MapVetFromRM(vet);
-                    context.Vets.InsertOnSubmit(newVet);
-                    context.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
+                    db.Vets.InsertOnSubmit(newVet);
+                    db.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
 
                     //  Update user table to reference the new vet
                     user.Vet = newVet;
-                    context.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
+                    db.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
 
                     //  If everything is OK, commit
-                    context.Transaction.Commit();
+                    db.Transaction.Commit();
 
                     return Ok(newVet);
                 }
                 catch (Exception e)
                 {
                     //  Rollback if something goes wrong
-                    context.Transaction.Rollback();
+                    db.Transaction.Rollback();
                     return InternalServerError(e);
                 }
             }
@@ -110,16 +110,16 @@ namespace PetProject.API.Controllers
         {
             try
             {
-                var vet = context.Vets.FirstOrDefault(v => v.idVet == vetId);
+                var vet = db.Vets.FirstOrDefault(v => v.idVet == vetId);
                 if (vet == null)
                     return NotFound();
 
-                var details = context.DetailAppointments.Where(d => d.idVet == vetId);
+                var details = db.DetailAppointments.Where(d => d.idVet == vetId);
                 if (!details.Any())
                     return Ok(Enumerable.Empty<Appointment>());
 
                 var appointments = from d in details
-                                   join a in context.Appointments 
+                                   join a in db.Appointments 
                                    on d.idAppointment equals a.idAppointment
                                    where d.idVet == vetId
                                    select a;
@@ -146,12 +146,12 @@ namespace PetProject.API.Controllers
         {
             if (lat == 0 || lon == 0)
             {
-                return Ok(context.Vets);
+                return Ok(db.Vets);
             }
             else
             {
                 List<Vet> vets = new List<Vet>();
-                foreach (var vet in context.Vets)
+                foreach (var vet in db.Vets)
                 {
                     double distance = Helpers.Instance.DistanceInMiles(
                                 Convert.ToDouble(vet.latitude),

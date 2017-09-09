@@ -7,7 +7,7 @@ using PetApiClient;
 
 namespace PetApiClient.Services
 {
-    public class PetApi : BaseRestApi, IUsersService, IOwnersService, IAppointmentsService, IVetsService
+    public class PetApi : BaseRestApi, IUsersService, IOwnersService, IAppointmentsService, IVetsService, IPetService
     {
         protected override string BaseUrl => Constants.BaseApiUrl;
 
@@ -106,7 +106,7 @@ namespace PetApiClient.Services
 
         public async Task<Pet> GetPet(int id)
         {
-            return await GetApiAsync<Pet>($"pets/{id}/");
+            return await GetApiAsync<Pet>($"pets/{id}");
         }
 
         public async Task<List<ClinicHistory>> GetPetClinicHistories(int petId)
@@ -122,6 +122,16 @@ namespace PetApiClient.Services
         public async Task AttendAppointment(int id)
         {
             await PutApiAsync($"appointments/{id}/attend", string.Empty);
+        }
+
+        public async Task<Pet> PostPet(PetRM pet)
+        {
+            return await PostApiAsync<Pet>("pets", pet.ToJson());
+        }
+
+        public async Task<Pet> UpdatePet(int petId, PetRM pet)
+        {
+            return await PutApiAsync<Pet>($"pets/{petId}", pet.ToJson());
         }
     }
 }

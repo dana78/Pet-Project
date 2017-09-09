@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PetMobile.Views.Owner
+namespace PetMobile.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AppointmentPage : ContentPage
 	{
         AppointmentViewModel viewModel;
-        private Pet pet;
 
         public AppointmentPage (Pet pet)
 		{
@@ -23,9 +22,5 @@ namespace PetMobile.Views.Owner
             viewModel.Pet = pet;
 		}
 
-        protected async override void OnAppearing()
-        {
-            await viewModel.OnAppearing();
-        }
     }
 }

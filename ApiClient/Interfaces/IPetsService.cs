@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace PetApiClient.Interfaces
 {
-    public interface IOwnersService
+    public interface IPetService
     {
-        Task<List<Pet>> GetPets(int userId);
+        Task<Pet> PostPet(PetRM pet);
+        Task<Pet> UpdatePet(int petId, PetRM pet);
     }
 }

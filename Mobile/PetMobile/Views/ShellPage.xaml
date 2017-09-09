@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PetMobile.Views.Owner.ShellPage"
+             x:Class="PetMobile.Views.ShellPage"
              MasterBehavior="Popover"
-             xmlns:pages="clr-namespace:PetMobile.Views.Owner">
+             xmlns:pages="clr-namespace:PetMobile.Views">
     <MasterDetailPage.Master>
         <pages:ShellPageMaster x:Name="MasterPage" />
     </MasterDetailPage.Master>

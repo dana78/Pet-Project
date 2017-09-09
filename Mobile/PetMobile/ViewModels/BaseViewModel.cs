@@ -12,6 +12,7 @@ namespace PetMobile.ViewModels
     {
         public static INavigation Navigation { get; set; }
         public static MasterDetailPage Master { get; set; }
+        public static IAlertService AlertService { get; set; } = new FormsAlertService();
         public Session Session => Session.Instance;
 
         private bool _isBusy;
@@ -31,12 +32,12 @@ namespace PetMobile.ViewModels
 
         public async Task DisplayAlert(string title, string message, string cancel = "OK")
         {
-            await Application.Current.MainPage.DisplayAlert(title, message, cancel);
+            await AlertService.DisplayAlert(title, message, cancel);
         }
 
         public async Task<bool> DisplayAlert(string title, string message, string accept, string cancel)
         {
-            return await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
+            return await AlertService.DisplayAlert(title, message, accept, cancel);
         }
 
         public async Task NavigateTo(Page pageView)
@@ -53,6 +54,11 @@ namespace PetMobile.ViewModels
         public async Task MasterNavigateBack()
         {
             await Master.Detail.Navigation.PopAsync();
+        }
+
+        public async Task MasterNavigateToRoot()
+        {
+            await Master.Detail.Navigation.PopToRootAsync();
         }
 
         public async Task NavigateGoBack()

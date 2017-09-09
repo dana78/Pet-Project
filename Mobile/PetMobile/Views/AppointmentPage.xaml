@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PetMobile.Views.AppointmentPage"
+             Title="Solicitud de cita">
+    <ContentPage.Content>
+        <StackLayout Padding="12" Spacing="0">
+            <Label Text="¿Cuál es el motivo de tu cita?" FontSize="20" FontAttributes="Bold"/>
+            <Label Text="Describelo brevemente" />
+            <Entry Text="{Binding Appointment.Title}" Placeholder="Título de cita" Margin="0,0,0,20"/>
+
+            <Label Text="¿Para cuándo deseas tu cita?" FontSize="20" FontAttributes="Bold"/>
+            <Label Text="Escoge la fecha dando clic aquí:" />
+            <DatePicker Date="{Binding Appointment.Date}" Margin="0,0,0,12"/>
+            <Button Text="Siguiente" 
+                    Command="{Binding GoToVetSelectionCommand}" 
+                    BackgroundColor="{StaticResource colorAccent}"
+                    TextColor="White"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           IsVisible="{Binding IsBusy}" 
+                           HorizontalOptions="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

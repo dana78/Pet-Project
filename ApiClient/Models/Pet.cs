@@ -122,6 +122,11 @@ namespace PetApiClient{
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
+        public PetRM ToRequestModel()
+        {
+            return new PetRM(IdOwner, Firstname, Lastname, Birthday, Breed, Color);
+        }
+
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>

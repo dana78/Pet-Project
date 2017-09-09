@@ -77,27 +77,28 @@ namespace PetProject.API.Controllers
         /// <summary>
         /// Updates pet info
         /// </summary>
-        /// <param name="pet"></param>
-        /// <returns>New pet info</returns>
+        /// <param name="id">Pet id</param>
+        /// <param name="pet">New pet info</param>
+        /// <returns>Updated pet info</returns>
         [HttpPut]
-        [Route("api/pets")]
+        [Route("api/pets/{id}")]
         [ResponseType(typeof(Pet))]
-        public IHttpActionResult UpdatePet(Pet pet)
+        public IHttpActionResult UpdatePet([FromUri] int id, [FromBody]PetRM pet)
         {
             if (!ModelState.IsValid || pet == null)
                 return BadRequest();
 
             try
             {
-                var petFound = db.Pets.FirstOrDefault(p => p.idPet == pet.idPet);
+                var petFound = db.Pets.FirstOrDefault(p => p.idPet == id);
                 if (petFound == null)
                     return NotFound();
 
-                petFound.firstname = pet.firstname;
-                petFound.lastname = pet.lastname;
-                petFound.breed = pet.breed;
-                petFound.color = pet.color;
-                petFound.birthday = pet.birthday;
+                petFound.firstname = pet.Firstname;
+                petFound.lastname = pet.Lastname;
+                petFound.breed = pet.Breed;
+                petFound.color = pet.Color;
+                petFound.birthday = pet.Birthday;
 
                 db.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
                 return Ok(petFound);
@@ -131,6 +132,31 @@ namespace PetProject.API.Controllers
                 return Ok(histories);
             }
             catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/pets/{petId}/appointments")]
+        [ResponseType(typeof(Appointment[]))]
+        public IHttpActionResult GetAppointments(int petId)
+        {
+            try
+            {
+                var pet = db.Pets.FirstOrDefault(p => p.idPet == petId);
+                if (pet == null)
+                    return NotFound();
+
+                var appointments = db.Appointments.Where(a => a.idPet == pet.idPet && a.attended == false);
+                return Ok(appointments);
+            }
+            catch(Exception e)
             {
                 return InternalServerError(e);
             }

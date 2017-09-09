@@ -53,12 +53,18 @@ namespace PetMobile.ViewModels
                     return;
                 }
 
-                //  Successful login
                 Owner user = loginResult.Result.Owner;
+                if(user == null)
+                {
+                    await DisplayAlert("¡Ups!", "No tienes asignado un perfil de dueño de mascota.");
+                    return;
+                }
+
+                //  Successful login
                 App.Database.SaveUser(user);
                 Session.Instance.Owner = user;
 
-                MoveToMainPage();
+                Application.Current.MainPage = new Views.ShellPage();
             }
             finally
             {
@@ -75,21 +81,6 @@ namespace PetMobile.ViewModels
         {
             IsBusy = isBusy;
             LoginCommand.ChangeCanExecute();
-        }
-
-        /// <summary>
-        /// Navigates to default main page depending on the profile the user has.
-        /// If the user has both Vet and Owner profile, it will navigate as Vet by default.
-        /// </summary>
-        private void MoveToMainPage()
-        {
-            Page mainPage;
-            if (Session.Instance.Vet != null)
-                mainPage = new Views.Vet.MainPage();
-            else
-                mainPage = new Views.Owner.ShellPage();
-
-            Application.Current.MainPage = mainPage;
         }
     }
 }

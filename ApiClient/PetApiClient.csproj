@@ -42,6 +42,7 @@
     </Compile>
     <Compile Include="ExceptionFactory.cs" />
     <Compile Include="Interfaces\IAppointmentsService.cs" />
+    <Compile Include="Interfaces\IOwnersService.cs" />
     <Compile Include="Interfaces\IPetsService.cs" />
     <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Interfaces\IVetService.cs" />

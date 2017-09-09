@@ -48,9 +48,13 @@
     <Compile Include="Data\IDatabase.cs" />
     <Compile Include="Data\OwnerData.cs" />
     <Compile Include="Data\PetData.cs" />
+    <Compile Include="Helpers\Behaviors\EmailValidatorBehavior.cs" />
     <Compile Include="Helpers\Converters\BirthdayToAgeConverter.cs" />
     <Compile Include="Helpers\Converters\CountToVisibleConverter.cs" />
+    <Compile Include="Helpers\Converters\InverseBoolConverter.cs" />
     <Compile Include="Helpers\DateHelpers.cs" />
+    <Compile Include="Helpers\FormsAlertService.cs" />
+    <Compile Include="Helpers\IAlertService.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
     <Compile Include="Helpers\Session.cs" />
     <Compile Include="Helpers\Settings.cs" />
@@ -60,47 +64,51 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PetEditViewModel.cs" />
     <Compile Include="ViewModels\PetProfileViewModel.cs" />
-    <Compile Include="Views\General\LoginPage.xaml.cs">
+    <Compile Include="Views\AppointmentVetSelection.xaml.cs">
+      <DependentUpon>AppointmentVetSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\General\RegistrationPage.xaml.cs">
+    <Compile Include="Views\PetEditPage.xaml.cs">
+      <DependentUpon>PetEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Owner\AppointmentListPage.xaml.cs">
+    <Compile Include="Views\AppointmentListPage.xaml.cs">
       <DependentUpon>AppointmentListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Owner\AppointmentPage.xaml.cs">
+    <Compile Include="Views\AppointmentPage.xaml.cs">
       <DependentUpon>AppointmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Owner\MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Owner\PetProfilePage.xaml.cs">
+    <Compile Include="Views\PetProfilePage.xaml.cs">
       <DependentUpon>PetProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Owner\ShellPage.xaml.cs">
+    <Compile Include="Views\ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Owner\ShellPageDetail.xaml.cs">
+    <Compile Include="Views\ShellPageDetail.xaml.cs">
       <DependentUpon>ShellPageDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Owner\ShellPageMaster.xaml.cs">
+    <Compile Include="Views\ShellPageMaster.xaml.cs">
       <DependentUpon>ShellPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ShellMasterViewModel.cs" />
-    <Compile Include="Views\Owner\ShellPageMenuItem.cs" />
-    <Compile Include="Views\Vet\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Helpers\ShellPageMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Constants.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Constants.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\General\LoginPage.xaml">
+    <EmbeddedResource Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -173,55 +181,49 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\General\RegistrationPage.xaml">
+    <EmbeddedResource Include="Views\RegistrationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Owner\ShellPage.xaml">
+    <EmbeddedResource Include="Views\ShellPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Owner\MainPage.xaml">
+    <EmbeddedResource Include="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Vet\MainPage.xaml">
+    <EmbeddedResource Include="Views\ShellPageMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Owner\ShellPageMaster.xaml">
+    <EmbeddedResource Include="Views\ShellPageDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Owner\ShellPageDetail.xaml">
+    <EmbeddedResource Include="Views\PetProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Owner\PetProfilePage.xaml">
+    <EmbeddedResource Include="Views\AppointmentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Owner\AppointmentPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Owner\AppointmentListPage.xaml">
+    <EmbeddedResource Include="Views\AppointmentListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -232,7 +234,18 @@
       <Name>PetApiClient</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\PetEditPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AppointmentVetSelection.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.267\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.267\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

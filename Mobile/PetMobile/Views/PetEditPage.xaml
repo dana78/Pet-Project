@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PetMobile.Views.PetEditPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="12" Spacing="0">
+                <Label x:Name="FormTitle" FontSize="Large" Margin="0,16,0,16" TextColor="{StaticResource colorPrimaryDark}"/>
+
+                <Label Text="Nombre*" TextColor="{StaticResource colorPrimary}"/>
+                <Entry Placeholder="Nombre" Text="{Binding Pet.Firstname}" Margin="0,0,0,8"/>
+
+                <Label Text="Apellido" TextColor="{StaticResource colorPrimary}"/>
+                <Entry Placeholder="Apellido" Text="{Binding Pet.Lastname}" Margin="0,0,0,8"/>
+
+                <Label Text="Raza*" TextColor="{StaticResource colorPrimary}"/>
+                <Entry Placeholder="Raza" Text="{Binding Pet.Breed}" Margin="0,0,0,8" />
+
+                <Label Text="Color" TextColor="{StaticResource colorPrimary}"/>
+                <Entry Placeholder="Color" Text="{Binding Pet.Color}" Margin="0,0,0,8"/>
+
+                <Label Text="Nacimiento*" TextColor="{StaticResource colorPrimary}"/>
+                <DatePicker Date="{Binding Pet.Birthday}"
+                        MinimumDate="{Binding MinimumDate}" 
+                        MaximumDate="{Binding MaximumDate}"/>
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                                   HorizontalOptions="Center"/>
+                <Button Text="Enviar" 
+                        Command="{Binding SendPetCommand}" 
+                        BackgroundColor="{StaticResource colorPrimaryDark}"
+                        TextColor="White"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

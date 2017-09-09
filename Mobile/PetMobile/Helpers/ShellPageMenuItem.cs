@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetMobile.Views.Owner
+namespace PetMobile.Helpers
 {
 
     public class ShellPageMenuItem
     {
         public ShellPageMenuItem()
         {
-            TargetType = typeof(ShellPageDetail);
+            TargetType = typeof(Views.ShellPageDetail);
         }
         public int Id { get; set; }
         public string Title { get; set; }

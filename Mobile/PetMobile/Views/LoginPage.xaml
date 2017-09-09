@@ -6,7 +6,8 @@
 
     <StackLayout Padding="12" VerticalOptions="Center">
         <Image Source="logo.png"/>
-        <Entry Text="{Binding Credentials.Email}" 
+        <Entry x:Name="EmailEntry"
+               Text="{Binding Credentials.Email}" 
                Placeholder="Correo electrónico"
                Margin="0,8,0,0"/>
         <Entry Text="{Binding Credentials.Password}" 

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Windows.Input;
+using PetMobile.Views;
 
 namespace PetMobile.ViewModels
 {
@@ -16,6 +18,8 @@ namespace PetMobile.ViewModels
     {
         private IOwnersService _ownersService;
         public ObservableRangeCollection<Pet> Pets { get; set; }
+        public ICommand NavigateToPetCreationCommand => new Command(async () => await NavigateToPetCreation());
+
 
         public DashboardViewModel() : this (PetApi.Instance){ }
         public DashboardViewModel(IOwnersService ownersService)
@@ -34,6 +38,11 @@ namespace PetMobile.ViewModels
             Pets.ReplaceRange(await _ownersService.GetPets(Session.Owner.IdOwner.Value));
 
             IsBusy = false;
+        }
+
+        private async Task NavigateToPetCreation()
+        {
+            await NavigateTo(new PetEditPage(null));
         }
     }
 }

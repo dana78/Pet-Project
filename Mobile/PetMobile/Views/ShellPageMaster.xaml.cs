@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PetMobile.Views.Owner
+namespace PetMobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShellPageMaster : ContentPage

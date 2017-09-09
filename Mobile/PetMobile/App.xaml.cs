@@ -25,7 +25,7 @@ namespace PetMobile
             else
             {
                 Session.Instance.Owner = user;
-                MainPage = new Views.Owner.ShellPage();
+                MainPage = new Views.ShellPage();
             }
         }
 

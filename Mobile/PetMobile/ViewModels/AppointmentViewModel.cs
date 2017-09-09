@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using PetMobile.Views;
 
 namespace PetMobile.ViewModels
 {
@@ -18,22 +19,9 @@ namespace PetMobile.ViewModels
         private readonly IVetsService _vetsService;
 
         public ObservableRangeCollection<Vet> Vets { get; set; }
-
-        private int selectedIndex;
-        public int SelectedIndex
-        {
-            get { return selectedIndex; }
-            set
-            {
-                selectedIndex = value;
-                RaisePropertyChanged();
-                Appointment.VetId = Vets[selectedIndex].IdVet;
-            }
-        }
-
         public Pet Pet { get; set; }
         public AppointmentRM Appointment { get; set; }
-        public Command MakeAppointmentCommand { get; set; }
+        public Command GoToVetSelectionCommand { get; set; }
 
         public AppointmentViewModel() : this(PetApi.Instance, PetApi.Instance) { }
         public AppointmentViewModel(IAppointmentsService appointmentService, IVetsService vetsService)
@@ -43,39 +31,67 @@ namespace PetMobile.ViewModels
 
             Vets = new ObservableRangeCollection<Vet>();
             Pet = new Pet();
-            Appointment = new AppointmentRM();
-            Appointment.Date = DateTime.Now;
+            Appointment = new AppointmentRM { Date = DateTime.Now };
 
-            MakeAppointmentCommand = new Command(async () => await MakeAppointment(), () => !IsBusy);
+            GoToVetSelectionCommand = new Command(async () => await GoToVetSelection(),
+                                                        () => !IsBusy);
         }
 
-        public async Task OnAppearing()
-        {
-            IsBusy = true;
-
-            IEnumerable<Vet> enumerable = await _vetsService.GetAllVets();
-            Vets.AddRange(enumerable);
-
-            IsBusy = false;
-        }
-
-        private async Task MakeAppointment()
+        private async Task GoToVetSelection()
         {
             ChangeIsBusy(true);
 
+            if (!string.IsNullOrEmpty(Appointment.Title))
+            {
+                //  Successful validation
+                await GetVets();
+                await MasterNavigateTo(new AppointmentVetSelection(this));
+            }
+            else
+            {
+                //  Failed validation
+                await DisplayAlert("Un momento", "Debes ingresar un título (motivo) a tu cita.");
+            }
+
+            ChangeIsBusy(false);
+        }
+
+        public async Task GetVets()
+        {
+            IEnumerable<Vet> enumerable = await _vetsService.GetAllVets();
+            Vets.ReplaceRange(enumerable);
+        }
+
+        public async Task MakeAppointment(Vet vet)
+        {
+            var shouldContinue = await DisplayAlert("Cita",
+                                $"Has seleccionado a {vet.Fullname} para tu cita con {Pet.Firstname}. ¿Deseas continuar?",
+                                "SI", "NO");
+            if (!shouldContinue)
+                return;
+
+            ChangeIsBusy(true);
+
+            Appointment.VetId = vet.IdVet;
             Appointment.PetId = Pet.IdPet;
             var appointment = await _appointmentsService.PostAppointment(Appointment);
 
             ChangeIsBusy(false);
 
-            await DisplayAlert("Correcto", $"Se ha registrado tu cita con el id {appointment.IdAppointment}.");
-            await MasterNavigateBack();
+            await DisplayAlert("¡Correcto!",
+                                $"¡Genial! " +
+                                $"Has agendado una cita para {Pet.Firstname} " +
+                                $"con el código {appointment.IdAppointment} " +
+                                $"y fecha {Appointment.Date.Value.ToString("dd MMMM yyyy")}.");
+
+            await MasterNavigateToRoot();
         }
 
         private void ChangeIsBusy(bool isBusy)
         {
             IsBusy = isBusy;
-            MakeAppointmentCommand.ChangeCanExecute();
+            GoToVetSelectionCommand.ChangeCanExecute();
         }
     }
+
 }
