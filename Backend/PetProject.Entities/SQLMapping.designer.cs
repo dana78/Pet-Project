@@ -715,7 +715,7 @@ namespace PetProject.Entities
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment1_DetailAppointment", Storage="_Appointment", ThisKey="idAppointment", OtherKey="idAppointment", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment_DetailAppointment", Storage="_Appointment", ThisKey="idAppointment", OtherKey="idAppointment", IsForeignKey=true)]
 		internal Appointment Appointment
 		{
 			get
@@ -1179,6 +1179,8 @@ namespace PetProject.Entities
 		
 		private string _color;
 		
+		private System.Nullable<bool> _sex;
+		
 		private EntitySet<Disease> _Diseases;
 		
 		private EntitySet<Vaccination> _Vaccinations;
@@ -1207,6 +1209,8 @@ namespace PetProject.Entities
     partial void OnbreedChanged();
     partial void OncolorChanging(string value);
     partial void OncolorChanged();
+    partial void OnsexChanging(System.Nullable<bool> value);
+    partial void OnsexChanged();
     #endregion
 		
 		public Pet()
@@ -1363,6 +1367,26 @@ namespace PetProject.Entities
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="Bit")]
+		public System.Nullable<bool> sex
+		{
+			get
+			{
+				return this._sex;
+			}
+			set
+			{
+				if ((this._sex != value))
+				{
+					this.OnsexChanging(value);
+					this.SendPropertyChanging();
+					this._sex = value;
+					this.SendPropertyChanged("sex");
+					this.OnsexChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Disease", Storage="_Diseases", ThisKey="idPet", OtherKey="idPet")]
 		public EntitySet<Disease> Diseases
 		{
@@ -1402,7 +1426,7 @@ namespace PetProject.Entities
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment1", Storage="_Appointments", ThisKey="idPet", OtherKey="idPet")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment", Storage="_Appointments", ThisKey="idPet", OtherKey="idPet")]
 		internal EntitySet<Appointment> Appointments
 		{
 			get
@@ -3523,7 +3547,7 @@ namespace PetProject.Entities
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment1_DetailAppointment", Storage="_DetailAppointments", ThisKey="idAppointment", OtherKey="idAppointment")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Appointment_DetailAppointment", Storage="_DetailAppointments", ThisKey="idAppointment", OtherKey="idAppointment")]
 		public EntitySet<DetailAppointment> DetailAppointments
 		{
 			get
@@ -3536,7 +3560,7 @@ namespace PetProject.Entities
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment1", Storage="_Pet", ThisKey="idPet", OtherKey="idPet", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Appointment", Storage="_Pet", ThisKey="idPet", OtherKey="idPet", IsForeignKey=true)]
 		public Pet Pet
 		{
 			get

@@ -23,7 +23,7 @@
       <Column Name="idVet" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Clinic_DetailAppointment" Member="Clinic" ThisKey="idClinic" OtherKey="idClinic" Type="Clinic" IsForeignKey="true" />
       <Association Name="Vet_DetailAppointment" Member="Vet" ThisKey="idVet" OtherKey="idVet" Type="Vet" IsForeignKey="true" />
-      <Association Name="Appointment1_DetailAppointment" Member="Appointment" AccessModifier="Internal" ThisKey="idAppointment" OtherKey="idAppointment" Type="Appointment" IsForeignKey="true" />
+      <Association Name="Appointment_DetailAppointment" Member="Appointment" AccessModifier="Internal" ThisKey="idAppointment" OtherKey="idAppointment" Type="Appointment" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Disease" Member="Diseases">
@@ -55,10 +55,11 @@
       <Column Name="birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="breed" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
       <Column Name="color" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="sex" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Pet_Disease" Member="Diseases" ThisKey="idPet" OtherKey="idPet" Type="Disease" />
       <Association Name="Pet_Vaccination" Member="Vaccinations" ThisKey="idPet" OtherKey="idPet" Type="Vaccination" />
       <Association Name="Pet_ClinicHistory" Member="ClinicHistories" AccessModifier="Internal" ThisKey="idPet" OtherKey="idPet" Type="ClinicHistory" />
-      <Association Name="Pet_Appointment1" Member="Appointments" AccessModifier="Internal" ThisKey="idPet" OtherKey="idPet" Type="Appointment" />
+      <Association Name="Pet_Appointment" Member="Appointments" AccessModifier="Internal" ThisKey="idPet" OtherKey="idPet" Type="Appointment" />
       <Association Name="Owner_Pet" Member="Owner" ThisKey="idOwner" OtherKey="idOwner" Type="Owner" IsForeignKey="true" />
     </Type>
   </Table>
@@ -153,8 +154,8 @@
       <Column Name="idPet" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="confirmed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="attended" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Appointment1_DetailAppointment" Member="DetailAppointments" ThisKey="idAppointment" OtherKey="idAppointment" Type="DetailAppointment" />
-      <Association Name="Pet_Appointment1" Member="Pet" ThisKey="idPet" OtherKey="idPet" Type="Pet" IsForeignKey="true" />
+      <Association Name="Appointment_DetailAppointment" Member="DetailAppointments" ThisKey="idAppointment" OtherKey="idAppointment" Type="DetailAppointment" />
+      <Association Name="Pet_Appointment" Member="Pet" ThisKey="idPet" OtherKey="idPet" Type="Pet" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

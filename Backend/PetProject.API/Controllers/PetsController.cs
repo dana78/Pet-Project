@@ -1,10 +1,7 @@
 ﻿using PetProject.Common;
 using PetProject.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -99,6 +96,7 @@ namespace PetProject.API.Controllers
                 petFound.breed = pet.Breed;
                 petFound.color = pet.Color;
                 petFound.birthday = pet.Birthday;
+                petFound.sex = pet.Sex;
 
                 db.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
                 return Ok(petFound);
@@ -171,7 +169,8 @@ namespace PetProject.API.Controllers
                 color = pet.Color,
                 firstname = pet.Firstname,
                 lastname = pet.Lastname,
-                idOwner = pet.OwnerId
+                idOwner = pet.OwnerId,
+                sex = pet.Sex
             };
         }
     }
