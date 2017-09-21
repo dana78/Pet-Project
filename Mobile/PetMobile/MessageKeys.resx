@@ -117,18 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BaseApiUrl" xml:space="preserve">
-    <value>http://petprojectapi.azurewebsites.net/api/</value>
-    <comment>Base web api url</comment>
+  <data name="ChangeToolbar" xml:space="preserve">
+    <value>ChangeToolbar</value>
   </data>
-  <data name="BaseUrl" xml:space="preserve">
-    <value>http://petprojectapi.azurewebsites.net</value>
-    <comment>Base service url</comment>
+  <data name="Empty" xml:space="preserve">
+    <value>Empty.</value>
   </data>
-  <data name="UriOwners" xml:space="preserve">
-    <value>owners</value>
+  <data name="NoConnection" xml:space="preserve">
+    <value>No connection.</value>
   </data>
-  <data name="UriUsers" xml:space="preserve">
-    <value>users</value>
+  <data name="ToolbarColor" xml:space="preserve">
+    <value>ToolbarColor</value>
   </data>
 </root>

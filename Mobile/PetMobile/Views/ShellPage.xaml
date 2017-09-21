@@ -8,10 +8,10 @@
         <pages:ShellPageMaster x:Name="MasterPage" />
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
-        <NavigationPage>
+        <pages:TransparentNavigationPage>
             <x:Arguments>
-                <pages:MainPage />
+                <pages:DashboardPage />
             </x:Arguments>
-        </NavigationPage>
+        </pages:TransparentNavigationPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>

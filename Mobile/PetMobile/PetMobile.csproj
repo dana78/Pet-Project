@@ -51,6 +51,7 @@
     <Compile Include="Helpers\Behaviors\EmailValidatorBehavior.cs" />
     <Compile Include="Helpers\Converters\BirthdayToAgeConverter.cs" />
     <Compile Include="Helpers\Converters\CountToVisibleConverter.cs" />
+    <Compile Include="Helpers\Converters\EmptyStringToUnspecifiedTextConverter.cs" />
     <Compile Include="Helpers\Converters\InverseBoolConverter.cs" />
     <Compile Include="Helpers\DateHelpers.cs" />
     <Compile Include="Helpers\FormsAlertService.cs" />
@@ -59,6 +60,11 @@
     <Compile Include="Helpers\Session.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Util.cs" />
+    <Compile Include="MessageKeys.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageKeys.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AppointmentListViewModel.cs" />
     <Compile Include="ViewModels\AppointmentViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -85,8 +91,8 @@
     <Compile Include="Views\AppointmentPage.xaml.cs">
       <DependentUpon>AppointmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Views\DashboardPage.xaml.cs">
+      <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PetProfilePage.xaml.cs">
       <DependentUpon>PetProfilePage.xaml</DependentUpon>
@@ -102,11 +108,18 @@
     </Compile>
     <Compile Include="ViewModels\ShellMasterViewModel.cs" />
     <Compile Include="Helpers\ShellPageMenuItem.cs" />
+    <Compile Include="Views\TransparentNavigationPage.xaml.cs">
+      <DependentUpon>TransparentNavigationPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Constants.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Constants.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessageKeys.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageKeys.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
@@ -118,6 +131,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FormsToolkit, Version=1.1.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FormsToolkit.1.1.18\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\FormsToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\portable-net45+wp80+win8+wpa81\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
     </Reference>
@@ -193,7 +209,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MainPage.xaml">
+    <EmbeddedResource Include="Views\DashboardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -242,6 +258,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\AppointmentVetSelection.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TransparentNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

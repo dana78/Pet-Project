@@ -108,6 +108,11 @@ namespace PetApiClient
         [DataMember(Name="Color", EmitDefaultValue=false)]
         public string Color { get; set; }
         /// <summary>
+        /// Gets or Sets Color
+        /// </summary>
+        [DataMember(Name = "Sex", EmitDefaultValue = false)]
+        public bool? Sex { get; set; }
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -121,6 +126,7 @@ namespace PetApiClient
             sb.Append("  Birthday: ").Append(Birthday).Append("\n");
             sb.Append("  Breed: ").Append(Breed).Append("\n");
             sb.Append("  Color: ").Append(Color).Append("\n");
+            sb.Append("  Sex: ").Append(Sex).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -186,6 +192,11 @@ namespace PetApiClient
                     this.Color == other.Color ||
                     this.Color != null &&
                     this.Color.Equals(other.Color)
+                ) &&
+                (
+                    this.Sex == other.Sex ||
+                    this.Sex != null &&
+                    this.Sex.Equals(other.Sex)
                 );
         }
 
@@ -212,6 +223,8 @@ namespace PetApiClient
                     hash = hash * 59 + this.Breed.GetHashCode();
                 if (this.Color != null)
                     hash = hash * 59 + this.Color.GetHashCode();
+                if (this.Sex != null)
+                    hash = hash * 59 + this.Sex.GetHashCode();
                 return hash;
             }
         }

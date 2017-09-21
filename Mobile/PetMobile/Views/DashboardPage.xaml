@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PetMobile.Helpers.Converters;assembly=PetMobile"
-             x:Class="PetMobile.Views.MainPage"
+             x:Class="PetMobile.Views.DashboardPage"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              Title="Inicio">
     <ContentPage.ToolbarItems>
@@ -21,7 +21,7 @@
                                HorizontalOptions="Center" 
                                VerticalOptions="Center"/>
             <ListView x:Name="PetsListView"
-                      ItemsSource="{Binding Pets, Mode=TwoWay}" 
+                      ItemsSource="{Binding Pets}" 
                       HasUnevenRows="True" 
                       Margin="0,20,0,0" 
                       ItemTapped="Pets_ItemTapped" 
@@ -48,11 +48,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout HorizontalOptions="Center" 
+            <StackLayout x:Name="NoPetsMessage"
+                         HorizontalOptions="Center" 
                          VerticalOptions="Center" 
                          Spacing="4"
-                         BindingContext="{x:Reference Name=PetsListView}"
-                         IsVisible="{Binding Path=IsVisible, Converter={StaticResource InverseBoolConverter}}">
+                         IsVisible="False"
+                         BindingContext="{x:Reference Name=PetsListView}">
                 <Label Text="No tienes ninguna mascota aún." />
                 <Button Text="¡Registra tu engreído!" BackgroundColor="{StaticResource colorAccent}"/>
             </StackLayout>

@@ -22,6 +22,7 @@ namespace PetMobile.ViewModels
         public Pet Pet { get; set; }
         public AppointmentRM Appointment { get; set; }
         public Command GoToVetSelectionCommand { get; set; }
+        public DateTime MinimumDate => DateTime.Now;
 
         public AppointmentViewModel() : this(PetApi.Instance, PetApi.Instance) { }
         public AppointmentViewModel(IAppointmentsService appointmentService, IVetsService vetsService)
@@ -31,7 +32,7 @@ namespace PetMobile.ViewModels
 
             Vets = new ObservableRangeCollection<Vet>();
             Pet = new Pet();
-            Appointment = new AppointmentRM { Date = DateTime.Now };
+            Appointment = new AppointmentRM { Date = DateTime.Now };            
 
             GoToVetSelectionCommand = new Command(async () => await GoToVetSelection(),
                                                         () => !IsBusy);

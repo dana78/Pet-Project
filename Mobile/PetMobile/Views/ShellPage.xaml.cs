@@ -35,7 +35,7 @@ namespace PetMobile.Views
             {
                 var page = (Page)Activator.CreateInstance(item.TargetType);
                 page.Title = item.Title;
-                Detail = new NavigationPage(page);
+                Detail = new TransparentNavigationPage(page);
                 IsPresented = false;
             }
             else

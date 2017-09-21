@@ -1,9 +1,11 @@
 ﻿using PetApiClient;
 using PetApiClient.Interfaces;
 using PetApiClient.Services;
+using PetMobile.Helpers;
+using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace PetMobile.ViewModels
@@ -11,6 +13,7 @@ namespace PetMobile.ViewModels
     public class PetEditViewModel : BaseViewModel
     {
         private readonly IPetService _petService;
+        private readonly IConnectivity _connectivityService;
 
         private Pet _pet;
         public Pet Pet
@@ -25,10 +28,11 @@ namespace PetMobile.ViewModels
         public Command SendPetCommand => new Command(async () => await SendPet(), () => !IsBusy);
 
 
-        public PetEditViewModel(Pet pet) : this(PetApi.Instance, pet) { }
-        public PetEditViewModel(IPetService petService, Pet pet)
+        public PetEditViewModel(Pet pet) : this(PetApi.Instance, CrossConnectivity.Current, pet) { }
+        public PetEditViewModel(IPetService petService, IConnectivity connectivityService, Pet pet)
         {
             _petService = petService;
+            _connectivityService = connectivityService;
             _pet = pet ?? new Pet();
         }
 
@@ -37,9 +41,15 @@ namespace PetMobile.ViewModels
         {
             ChangeIsBusy(true);
 
-            if (ValidModel(out string message))
+            if (ValidateModel(out string message))
             {
-                //  TODO: Manage exceptions and connectivity
+                var connection = await Util.CheckApiConnection(_connectivityService);
+                if (!connection.Available)
+                {
+                    await DisplayAlert("¡Ups!", connection.Message);
+                    return;
+                }
+
                 if (IsEditing)
                 {
                     await _petService.UpdatePet(Pet.IdPet.Value, Pet.ToRequestModel());
@@ -63,7 +73,7 @@ namespace PetMobile.ViewModels
             }
         }
 
-        private bool ValidModel(out string message)
+        private bool ValidateModel(out string message)
         {
             message = string.Empty;
             bool isValid = true;

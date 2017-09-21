@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetMobile", "PetMobile\PetMobile.csproj", "{56E79390-336D-4CCC-8C7B-B1FC15269F23}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetMobile.UWP", "PetMobile.UWP\PetMobile.UWP.csproj", "{E74DA338-E49B-4277-BB0F-DC9FC7A8A7D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetApiClient", "..\ApiClient\PetApiClient.csproj", "{CDE04782-E49A-4100-9407-7FCA4307513D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{37C4CE13-D9E3-4BEF-9F80-78BCD2B856B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

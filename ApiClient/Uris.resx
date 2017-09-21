@@ -117,7 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SQLiteDatabaseName" xml:space="preserve">
-    <value>PetDb.db3</value>
+  <data name="BaseApiUrl" xml:space="preserve">
+    <value>http://petprojectapi.azurewebsites.net/api/</value>
+    <comment>Base web api url</comment>
+  </data>
+  <data name="BaseUrl" xml:space="preserve">
+    <value>http://petprojectapi.azurewebsites.net</value>
+    <comment>Base service url</comment>
+  </data>
+  <data name="UriAppointments" xml:space="preserve">
+    <value>appointments</value>
+  </data>
+  <data name="UriOwners" xml:space="preserve">
+    <value>owners</value>
+  </data>
+  <data name="UriPets" xml:space="preserve">
+    <value>pets</value>
+  </data>
+  <data name="UriUsers" xml:space="preserve">
+    <value>users</value>
+  </data>
+  <data name="UriVets" xml:space="preserve">
+    <value>vets</value>
   </data>
 </root>

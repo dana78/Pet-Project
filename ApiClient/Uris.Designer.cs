@@ -20,27 +20,27 @@ namespace PetApiClient {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Constants {
+    public class Uris {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Constants() {
+        internal Uris() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PetApiClient.Constants", typeof(Constants).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PetApiClient.Uris", typeof(Uris).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -52,7 +52,7 @@ namespace PetApiClient {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace PetApiClient {
         /// <summary>
         ///   Looks up a localized string similar to http://petprojectapi.azurewebsites.net/api/.
         /// </summary>
-        internal static string BaseApiUrl {
+        public static string BaseApiUrl {
             get {
                 return ResourceManager.GetString("BaseApiUrl", resourceCulture);
             }
@@ -73,27 +73,54 @@ namespace PetApiClient {
         /// <summary>
         ///   Looks up a localized string similar to http://petprojectapi.azurewebsites.net.
         /// </summary>
-        internal static string BaseUrl {
+        public static string BaseUrl {
             get {
                 return ResourceManager.GetString("BaseUrl", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to appointments.
+        /// </summary>
+        public static string UriAppointments {
+            get {
+                return ResourceManager.GetString("UriAppointments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to owners.
         /// </summary>
-        internal static string UriOwners {
+        public static string UriOwners {
             get {
                 return ResourceManager.GetString("UriOwners", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pets.
+        /// </summary>
+        public static string UriPets {
+            get {
+                return ResourceManager.GetString("UriPets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to users.
         /// </summary>
-        internal static string UriUsers {
+        public static string UriUsers {
             get {
                 return ResourceManager.GetString("UriUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vets.
+        /// </summary>
+        public static string UriVets {
+            get {
+                return ResourceManager.GetString("UriVets", resourceCulture);
             }
         }
     }

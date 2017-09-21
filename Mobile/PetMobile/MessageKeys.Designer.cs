@@ -23,14 +23,14 @@ namespace PetMobile {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Constants {
+    internal class MessageKeys {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Constants() {
+        internal MessageKeys() {
         }
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace PetMobile {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PetMobile.Constants", typeof(Constants).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PetMobile.MessageKeys", typeof(MessageKeys).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,11 +62,38 @@ namespace PetMobile {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PetDb.db3.
+        ///   Looks up a localized string similar to ChangeToolbar.
         /// </summary>
-        internal static string SQLiteDatabaseName {
+        internal static string ChangeToolbar {
             get {
-                return ResourceManager.GetString("SQLiteDatabaseName", resourceCulture);
+                return ResourceManager.GetString("ChangeToolbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty..
+        /// </summary>
+        internal static string Empty {
+            get {
+                return ResourceManager.GetString("Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No connection..
+        /// </summary>
+        internal static string NoConnection {
+            get {
+                return ResourceManager.GetString("NoConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ToolbarColor.
+        /// </summary>
+        internal static string ToolbarColor {
+            get {
+                return ResourceManager.GetString("ToolbarColor", resourceCulture);
             }
         }
     }

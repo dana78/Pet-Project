@@ -11,7 +11,9 @@
 
             <Label Text="¿Para cuándo deseas tu cita?" FontSize="20" FontAttributes="Bold"/>
             <Label Text="Escoge la fecha dando clic aquí:" />
-            <DatePicker Date="{Binding Appointment.Date}" Margin="0,0,0,12"/>
+            <DatePicker Date="{Binding Appointment.Date}" 
+                        Margin="0,0,0,12"
+                        MinimumDate="{Binding MinimumDate}"/>
             <Button Text="Siguiente" 
                     Command="{Binding GoToVetSelectionCommand}" 
                     BackgroundColor="{StaticResource colorAccent}"

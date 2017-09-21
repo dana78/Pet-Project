@@ -16,7 +16,7 @@ namespace PetMobile.ViewModels
         {
             MenuItems = new ObservableCollection<ShellPageMenuItem>(new[]
             {
-                new ShellPageMenuItem { Id = 0, Title = "Inicio", TargetType = typeof(MainPage) },
+                new ShellPageMenuItem { Id = 0, Title = "Inicio", TargetType = typeof(DashboardPage) },
                 new ShellPageMenuItem { Id = 1, Title = "Mis citas" },
                 new ShellPageMenuItem { Id = 2, Title = "Configuración" },
                 new ShellPageMenuItem { Id = -1, Title = "Cerrar sesión" }

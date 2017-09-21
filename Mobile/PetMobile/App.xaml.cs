@@ -17,6 +17,11 @@ namespace PetMobile
             InitializeComponent();
 
             Database = new SQLiteDatabase(platform);
+            SetMainPageByLoggedUser();
+        }
+
+        private void SetMainPageByLoggedUser()
+        {
             var user = Database.GetLoggedUser();
             if (user == null)
             {

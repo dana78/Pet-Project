@@ -11,21 +11,26 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Windows.Input;
 using PetMobile.Views;
+using Plugin.Connectivity.Abstractions;
+using Plugin.Connectivity;
 
 namespace PetMobile.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
-        private IOwnersService _ownersService;
+        private readonly IOwnersService _ownersService;
+        private readonly IConnectivity _connectivityService;
+
         public ObservableRangeCollection<Pet> Pets { get; set; }
         public ICommand NavigateToPetCreationCommand => new Command(async () => await NavigateToPetCreation());
 
 
-        public DashboardViewModel() : this (PetApi.Instance){ }
-        public DashboardViewModel(IOwnersService ownersService)
+        public DashboardViewModel() : this(PetApi.Instance, CrossConnectivity.Current) { }
+        public DashboardViewModel(IOwnersService ownersService, IConnectivity connectivityService)
         {
             Pets = new ObservableRangeCollection<Pet>();
             _ownersService = ownersService;
+            _connectivityService = connectivityService;
         }
 
         public async Task OnAppearing()
@@ -35,7 +40,18 @@ namespace PetMobile.ViewModels
 
             IsBusy = true;
 
-            Pets.ReplaceRange(await _ownersService.GetPets(Session.Owner.IdOwner.Value));
+            var connectionStatus = await Util.CheckApiConnection(_connectivityService);
+            if (connectionStatus.Available)
+            {
+                Pets.ReplaceRange(await _ownersService.GetPets(Session.Owner.IdOwner.Value));
+                if (Pets.Count == 0)
+                    MessagingCenter.Send(this, MessageKeys.Empty);
+            }
+            else
+            {
+                MessagingCenter.Send(this, MessageKeys.NoConnection);
+                await DisplayAlert("Ups!", connectionStatus.Message);
+            }
 
             IsBusy = false;
         }

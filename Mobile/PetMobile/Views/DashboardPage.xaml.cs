@@ -12,10 +12,10 @@ using Xamarin.Forms.Xaml;
 namespace PetMobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ContentPage
+    public partial class DashboardPage : ContentPage
     {
         DashboardViewModel viewModel;
-        public MainPage()
+        public DashboardPage()
         {
             InitializeComponent();
             BindingContext = viewModel = new DashboardViewModel();
@@ -23,7 +23,22 @@ namespace PetMobile.Views
 
         protected override async void OnAppearing()
         {
+            NoPetsMessage.IsVisible = false;
+            MessagingCenter.Subscribe<DashboardViewModel>(this, MessageKeys.Empty, (message) =>
+            {
+                NoPetsMessage.IsVisible = true;
+            });
+            MessagingCenter.Subscribe<DashboardViewModel>(this, MessageKeys.NoConnection, (message) =>
+            {
+                NoPetsMessage.IsVisible = false;
+            });
             await viewModel.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            MessagingCenter.Unsubscribe<DashboardViewModel>(this, MessageKeys.Empty);
+            MessagingCenter.Unsubscribe<DashboardViewModel>(this, MessageKeys.NoConnection);
         }
 
         private async Task Pets_ItemTapped(object sender, ItemTappedEventArgs e)

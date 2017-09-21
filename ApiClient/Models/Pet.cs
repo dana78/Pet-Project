@@ -73,6 +73,11 @@ namespace PetApiClient{
         [DataMember(Name="color", EmitDefaultValue=false)]
         public string Color { get; set; }
         /// <summary>
+        /// Gets or Sets Color
+        /// </summary>
+        [DataMember(Name = "Sex", EmitDefaultValue = false)]
+        public bool? Sex { get; set; }
+        /// <summary>
         /// Gets or Sets Diseases
         /// </summary>
         [DataMember(Name="Diseases", EmitDefaultValue=false)]

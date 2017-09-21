@@ -47,8 +47,16 @@ namespace PetMobile.ViewModels
 
         public async Task MasterNavigateTo(Page pageView)
         {
-            Master.IsPresented = false;
-            await Master.Detail.Navigation.PushAsync(pageView);
+            if (pageView is Views.PetProfilePage)
+            {
+                var navPage = Master.Detail as Views.TransparentNavigationPage;
+                await navPage.PushAsync(pageView);
+            }
+            else
+            {
+                Master.IsPresented = false;
+                await Master.Detail.Navigation.PushAsync(pageView);
+            }
         }
 
         public async Task MasterNavigateBack()

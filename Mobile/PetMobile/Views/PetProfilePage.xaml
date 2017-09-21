@@ -4,11 +4,12 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              xmlns:vm="clr-namespace:PetMobile.ViewModels;assembly=PetMobile"   
              xmlns:conv="clr-namespace:PetMobile.Helpers.Converters;assembly=PetMobile"
-             x:Class="PetMobile.Views.PetProfilePage"
-             Title="Perfil de mascota">
+             x:Class="PetMobile.Views.PetProfilePage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <conv:BirthdayToAgeConverter x:Key="BirthdayToAgeConverter" />
+            <conv:EmptyStringToUnspecifiedTextConverter x:Key="EmptyToUnspecifiedConverter" />
+            <conv:BoolToSexConverter x:Key="BoolToSexConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -17,54 +18,77 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Nueva cita" Order="Primary" Command="{Binding GoToAppointmentCommand}"/>
+        <ToolbarItem Text="Nueva cita" Icon="ic_calendar_plus.png" Order="Primary" Command="{Binding GoToAppointmentCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <ScrollView>
-            <Grid RowSpacing="0" ColumnSpacing="30">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+        <Grid>
+            <ContentView x:Name="HeaderPanel"                
+                         HorizontalOptions="FillAndExpand" 
+                         VerticalOptions="FillAndExpand">
+                <Grid HorizontalOptions="FillAndExpand"
+					  VerticalOptions="Start">
+                    <Image Source="dog.png" Aspect="AspectFill" HeightRequest="350"/>
+                    <BoxView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Color="#80000000" />
+                </Grid>
+            </ContentView>
+            <ScrollView x:Name="ParallaxScrollView"
+                        VerticalOptions="FillAndExpand" 
+                        HorizontalOptions="FillAndExpand">
+                <Grid RowSpacing="0"
+                      VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="250"/>
-                    <RowDefinition Height="46"/>
-                    <RowDefinition Height="46"/>
-                    <RowDefinition Height="46"/>
-                    <RowDefinition Height="46"/>
-                </Grid.RowDefinitions>
+                    <StackLayout x:Name="PetTitle" VerticalOptions="End" Padding="10" Spacing="0">
+                        <Label Text="{Binding Pet.Fullname}" 
+                               FontFamily="{StaticResource LightFontFamily}"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontSize="20"/>
 
-                <Image Grid.ColumnSpan="2" Source="dog.png" Aspect="AspectFill"/>
-                <BoxView Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Color="#80000000" />
-                <StackLayout Grid.ColumnSpan="2" VerticalOptions="End" Padding="10" Spacing="0">
-                    <Label Text="{Binding Pet.Fullname}" 
-                           FontFamily="{StaticResource LightFontFamily}"
-                           TextColor="White"
-                           FontAttributes="Bold"
-                           FontSize="20"/>
+                        <Label Text="{Binding Path=Pet.Birthday, Converter={StaticResource BirthdayToAgeConverter}}"
+                               FontFamily="{StaticResource LightFontFamily}"
+                               TextColor="White"/>
+                    </StackLayout>
 
-                    <Label Text="{Binding Path=Pet.Birthday, Converter={StaticResource BirthdayToAgeConverter}}"
-                           FontFamily="{StaticResource LightFontFamily}"
-                           TextColor="White"/>
-                </StackLayout>
+                    <Grid BackgroundColor="White" Grid.Row="1" ColumnSpacing="30" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="300"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label Grid.Row="0" Grid.ColumnSpan="2" TextColor="{StaticResource HeaderTextColor}" Text="Información canina" FontAttributes="Bold" VerticalTextAlignment="Center" Margin="16,8,0,0"/>
 
-                <Label Grid.Row="1" Grid.ColumnSpan="2" TextColor="{StaticResource HeaderTextColor}" Text="Información canina" FontAttributes="Bold" VerticalTextAlignment="Center" Margin="16,8,0,0"/>
+                        <Label   Grid.Row="1" Text="Nacimiento" Margin="0,1,0,0" Style="{StaticResource SimpleLineListItem}" FontSize="14" HorizontalTextAlignment="End"/>
+                        <Label   Grid.Row="1" VerticalTextAlignment="Center" Grid.Column="1" HorizontalTextAlignment="Start" Text="{Binding Pet.Birthday, StringFormat='{0:dd MMMM yyyy}'}" />
 
-                <!--<BoxView Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1" VerticalOptions="Start" Color="LightGray"/>-->
-                <Label Grid.Row="2" Text="Nacimiento" Margin="0,1,0,0" Style="{StaticResource SimpleLineListItem}" FontSize="14" HorizontalTextAlignment="End"/>
-                <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalTextAlignment="Start" Text="{Binding Pet.Birthday, StringFormat='{0:dd MMMM yyyy}'}" />
+                        <BoxView Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1" VerticalOptions="Start" Color="LightGray"/>
+                        <Label   Grid.Row="2" Text="Sexo" Margin="0,1,0,0" Style="{StaticResource SimpleLineListItem}" FontSize="14" HorizontalTextAlignment="End"/>
+                        <Label   Grid.Row="2" VerticalTextAlignment="Center" Grid.Column="1" HorizontalTextAlignment="Start" Text="{Binding Path=Pet.Sex, Converter={StaticResource BoolToSexConverter}}" />
+                        
+                        <BoxView Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="1" VerticalOptions="Start" Color="LightGray"/>
+                        <Label   Grid.Row="3" Text="Raza" Margin="0,1,0,0" Style="{StaticResource SimpleLineListItem}" FontSize="14" HorizontalTextAlignment="End"/>
+                        <Label   Grid.Row="3" VerticalTextAlignment="Center" Grid.Column="1" HorizontalTextAlignment="Start" Text="{Binding Pet.Breed}" />
 
-                <BoxView Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="1" VerticalOptions="Start" Color="LightGray"/>
-                <Label Grid.Row="3" Text="Raza" Margin="0,1,0,0" Style="{StaticResource SimpleLineListItem}" FontSize="14" HorizontalTextAlignment="End"/>
-                <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalTextAlignment="Start" Text="{Binding Pet.Breed}" />
+                        <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="1" VerticalOptions="Start" Color="LightGray"/>
+                        <Label   Grid.Row="4" Text="Color" Margin="0,1,0,0" Style="{StaticResource SimpleLineListItem}" FontSize="14" HorizontalTextAlignment="End"/>
+                        <Label   Grid.Row="4" VerticalTextAlignment="Center" Grid.Column="1" HorizontalTextAlignment="Start" Text="{Binding Path=Pet.Color, Converter={StaticResource EmptyToUnspecifiedConverter}}" />
+                        
+                    </Grid>
 
-                <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="1" VerticalOptions="Start" Color="LightGray"/>
-                <Label Grid.Row="4" Text="Color" Margin="0,1,0,0" Style="{StaticResource SimpleLineListItem}" FontSize="14" HorizontalTextAlignment="End"/>
-                <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalTextAlignment="Start" Text="{Binding Pet.Color}" />
-
-            </Grid>
-        </ScrollView>
+                </Grid>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
