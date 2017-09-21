@@ -17,20 +17,22 @@ namespace PetProject.Web.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<ActionResult> Login(Credentials credentials)
         {
-            var result = await PetApi.Instance.Login(credentials);
-
-            if (result.Success)
+            try
             {
-                Session["Vet"] = result.Result.Vet;
-                Session["Clinic"] = result.Result.Clinic;
-                Session["Owner"] = result.Result.Owner;
+                var result = await PetApi.Instance.Login(credentials);
+                Session["Vet"] = result.Vet;
+                Session["Clinic"] = result.Clinic;
+                Session["Owner"] = result.Owner;
                 return RedirectToAction("Index", "Vet");
             }
-            return View();
+            catch
+            {
+                return View();
+            }
         }
 
         public ActionResult Register()
