@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetApiClient", "..\ApiClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetProject.Web", "PetProject.Web.csproj", "{A8AC67D5-220F-4CB2-B99A-FABD3D91194C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E478CCBC-3479-4F9D-A8A1-87827733B0F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "..\UnitTestProject\UnitTestProject.csproj", "{94B217D5-F37D-472F-A67C-ABD53AB5FF74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{A8AC67D5-220F-4CB2-B99A-FABD3D91194C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8AC67D5-220F-4CB2-B99A-FABD3D91194C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8AC67D5-220F-4CB2-B99A-FABD3D91194C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94B217D5-F37D-472F-A67C-ABD53AB5FF74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B217D5-F37D-472F-A67C-ABD53AB5FF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B217D5-F37D-472F-A67C-ABD53AB5FF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B217D5-F37D-472F-A67C-ABD53AB5FF74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{94B217D5-F37D-472F-A67C-ABD53AB5FF74} = {E478CCBC-3479-4F9D-A8A1-87827733B0F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42C8F1B1-1FB1-47FF-AFF1-2F4F3B0357B8}
