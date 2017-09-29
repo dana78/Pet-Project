@@ -42,7 +42,7 @@ namespace PetMobile.ViewModels
         {
             ChangeIsBusy(true);
 
-            if (!string.IsNullOrEmpty(Appointment.Title))
+            if (ValidateTitle())
             {
                 //  Successful validation
                 await GetVets();
@@ -55,6 +55,11 @@ namespace PetMobile.ViewModels
             }
 
             ChangeIsBusy(false);
+        }
+
+        public bool ValidateTitle()
+        {
+            return !string.IsNullOrEmpty(Appointment.Title);
         }
 
         public async Task GetVets()

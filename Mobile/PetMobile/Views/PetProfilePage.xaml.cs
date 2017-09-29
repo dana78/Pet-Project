@@ -28,12 +28,10 @@ namespace PetMobile.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
             if (Parent is Xamarin.Forms.NavigationPage navigationPage)
                 navigationPage.On<iOS>().EnableTranslucentNavigationBar();
 
-            if(Title == string.Empty)
+            if(string.IsNullOrEmpty(Title))
                 MessagingService.Current.SendMessage(MessageKeys.ToolbarColor, Color.Transparent);
 
             ParallaxScrollView.Scrolled += ParallaxScrollView_Scrolled;
@@ -41,8 +39,6 @@ namespace PetMobile.Views
 
         protected override void OnDisappearing()
         {
-            base.OnDisappearing();
-
             if (Parent is Xamarin.Forms.NavigationPage navigationPage)
                 navigationPage.On<iOS>().DisableTranslucentNavigationBar();
 

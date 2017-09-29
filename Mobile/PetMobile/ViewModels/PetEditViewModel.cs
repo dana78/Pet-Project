@@ -53,18 +53,17 @@ namespace PetMobile.ViewModels
                 if (IsEditing)
                 {
                     await _petService.UpdatePet(Pet.IdPet.Value, Pet.ToRequestModel());
-                    await DisplayAlert("Éxito", "¡Excelente! La información de tu mascota ha sido actualizada exitosamente.");
-                    ChangeIsBusy(false);
-                    await NavigateGoBack();
+                    await DisplayAlert("Éxito", "¡Excelente! La información de tu mascota ha sido actualizada exitosamente.");                    
                 }
                 else
                 {
                     Pet.IdOwner = Session.Owner.IdOwner;
                     await _petService.PostPet(Pet.ToRequestModel());
                     await DisplayAlert("Éxito", "¡Excelente! Tu mascota ha sido registrada exitosamente.");
-                    ChangeIsBusy(false);
-                    await NavigateGoBack();
                 }
+
+                ChangeIsBusy(false);
+                await NavigateGoBack();
             }
             else
             {

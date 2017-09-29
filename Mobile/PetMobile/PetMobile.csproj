@@ -50,6 +50,7 @@
     <Compile Include="Data\PetData.cs" />
     <Compile Include="Helpers\Behaviors\EmailValidatorBehavior.cs" />
     <Compile Include="Helpers\Converters\BirthdayToAgeConverter.cs" />
+    <Compile Include="Helpers\Converters\BoolToSexConverter.cs" />
     <Compile Include="Helpers\Converters\CountToVisibleConverter.cs" />
     <Compile Include="Helpers\Converters\EmptyStringToUnspecifiedTextConverter.cs" />
     <Compile Include="Helpers\Converters\InverseBoolConverter.cs" />

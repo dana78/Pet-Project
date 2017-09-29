@@ -54,7 +54,13 @@ namespace PetApiClient
         /// Gets or Sets Title
         /// </summary>
         [DataMember(Name="Title", EmitDefaultValue=false)]
-        public string Title { get; set; }
+        private string _title;
+        public string Title
+        {
+            get { return _title?.Trim(); }
+            set { _title = value; }
+        }
+
         /// <summary>
         /// Gets or Sets ClinicId
         /// </summary>

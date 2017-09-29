@@ -1,4 +1,5 @@
 ﻿using PetApiClient;
+using PetMobile.Helpers.Converters;
 using PetMobile.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,16 @@ namespace PetMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PetEditPage : ContentPage
     {
+        private PetEditViewModel viewModel;
+
         /// <summary>
         /// Send null pet to create, an instance to update
         /// </summary>
         /// <param name="pet">Pet to update</param>
         public PetEditPage(Pet pet = null)
         {
+            viewModel = new PetEditViewModel(pet);
             InitializeComponent();
-            var viewModel = new PetEditViewModel(pet);
             if (pet == null)
             {
                 FormTitle.Text = "Registro de mascota";
@@ -33,6 +36,16 @@ namespace PetMobile.Views
                 viewModel.IsEditing = true;
             }
             BindingContext = viewModel;
+        }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            var selectedIndex = picker.SelectedItem;
+
+            var converter = new BoolToSexConverter();
+            bool? sex = (bool?)converter.ConvertBack(selectedIndex, null, null, null);
+            viewModel.Pet.Sex = sex;
         }
     }
 }

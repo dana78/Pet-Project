@@ -38,6 +38,7 @@ namespace PetProject.API.Controllers
                     password = user.Password,
                     emailConfirmed = false
                 };
+                
                 context.Users.InsertOnSubmit(newUser);
                 context.SubmitChanges(System.Data.Linq.ConflictMode.FailOnFirstConflict);
 

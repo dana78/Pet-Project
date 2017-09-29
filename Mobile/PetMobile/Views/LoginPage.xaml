@@ -7,14 +7,17 @@
     <StackLayout Padding="12" VerticalOptions="Center">
         <Image Source="logo.png"/>
         <Entry x:Name="EmailEntry"
+               AutomationId="EmailEntry"
                Text="{Binding Credentials.Email}" 
                Placeholder="Correo electrónico"
                Margin="0,8,0,0"/>
         <Entry Text="{Binding Credentials.Password}" 
+               AutomationId="PasswordEntry"
                Placeholder="Contraseña" 
                IsPassword="True"/>
         <Button Text="Ingresar"
                 TextColor="White"
+                AutomationId="LoginButton"
                 Command="{Binding LoginCommand}"
                 BackgroundColor="{StaticResource colorPrimaryDark}"/>
         <ActivityIndicator IsRunning="{Binding IsBusy}" 

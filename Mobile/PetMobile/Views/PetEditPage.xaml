@@ -4,14 +4,27 @@
              x:Class="PetMobile.Views.PetEditPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="12" Spacing="0">
-                <Label x:Name="FormTitle" FontSize="Large" Margin="0,16,0,16" TextColor="{StaticResource colorPrimaryDark}"/>
+            <StackLayout Padding="16" Spacing="0">
+                <Label x:Name="FormTitle" FontSize="20" Margin="0,10,0,16" TextColor="{StaticResource colorPrimaryDark}"/>
 
                 <Label Text="Nombre*" TextColor="{StaticResource colorPrimary}"/>
                 <Entry Placeholder="Nombre" Text="{Binding Pet.Firstname}" Margin="0,0,0,8"/>
 
                 <Label Text="Apellido" TextColor="{StaticResource colorPrimary}"/>
                 <Entry Placeholder="Apellido" Text="{Binding Pet.Lastname}" Margin="0,0,0,8"/>
+
+                <Label Text="Sexo*" TextColor="{StaticResource colorPrimary}" />
+                <Picker Title="Sexo" Margin="0,0,0,8" SelectedIndexChanged="Picker_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Macho</x:String>
+                            <x:String>Hembra</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.SelectedIndex>
+                        <x:Int32>0</x:Int32>
+                    </Picker.SelectedIndex>
+                </Picker>
 
                 <Label Text="Raza*" TextColor="{StaticResource colorPrimary}"/>
                 <Entry Placeholder="Raza" Text="{Binding Pet.Breed}" Margin="0,0,0,8" />
@@ -21,8 +34,8 @@
 
                 <Label Text="Nacimiento*" TextColor="{StaticResource colorPrimary}"/>
                 <DatePicker Date="{Binding Pet.Birthday}"
-                        MinimumDate="{Binding MinimumDate}" 
-                        MaximumDate="{Binding MaximumDate}"/>
+                            MinimumDate="{Binding MinimumDate}" 
+                            MaximumDate="{Binding MaximumDate}"/>
 
                 <ActivityIndicator IsRunning="{Binding IsBusy}" 
                                    HorizontalOptions="Center"/>

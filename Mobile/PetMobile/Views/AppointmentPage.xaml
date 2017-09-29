@@ -7,14 +7,18 @@
         <StackLayout Padding="12" Spacing="0">
             <Label Text="¿Cuál es el motivo de tu cita?" FontSize="20" FontAttributes="Bold"/>
             <Label Text="Describelo brevemente" />
-            <Entry Text="{Binding Appointment.Title}" Placeholder="Título de cita" Margin="0,0,0,20"/>
+            <Entry AutomationId="AppointmentTitleEntry" 
+                   Text="{Binding Appointment.Title}" 
+                   Placeholder="Título de cita" 
+                   Margin="0,0,0,20"/>
 
             <Label Text="¿Para cuándo deseas tu cita?" FontSize="20" FontAttributes="Bold"/>
             <Label Text="Escoge la fecha dando clic aquí:" />
             <DatePicker Date="{Binding Appointment.Date}" 
                         Margin="0,0,0,12"
                         MinimumDate="{Binding MinimumDate}"/>
-            <Button Text="Siguiente" 
+            <Button Text="Siguiente"
+                    AutomationId="AppointmentNextButton"
                     Command="{Binding GoToVetSelectionCommand}" 
                     BackgroundColor="{StaticResource colorAccent}"
                     TextColor="White"/>
