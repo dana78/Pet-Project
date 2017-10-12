@@ -25,14 +25,13 @@ namespace UnitTestProject
                 input2.Clear();
                 input2.SendKeys("123456");
             
-
-               IWebElement btnIniciaSesion = driver.FindElement(By.Id("btnInciarSesion"));
+               IWebElement btnIniciaSesion = driver.FindElement(By.Id("btnIniciarSesion"));
                btnIniciaSesion.Click();
                Thread.Sleep(2000);
 
-            //    IWebElement opcion = driver.FindElement(By.XPath("//*[@id=\"frmMenu:j_idt18\"]/ul/li[2]/a"));
-            //    opcion.Click();
-            //    Thread.Sleep(2000);
+            IWebElement opcion = driver.FindElement(By.XPath("//*[@id=\"table:CitasConfirmadas\"]/tr[1]/td[4]/a"));
+            opcion.Click();
+            Thread.Sleep(2000);
 
 
             //    IWebElement btnNuevo = driver.FindElement(By.Id("btnNuevo"));
