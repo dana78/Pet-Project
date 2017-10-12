@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetApiClient", "..\ApiClient\PetApiClient.csproj", "{CDE04782-E49A-4100-9407-7FCA4307513D}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E478CCBC-3479-4F9D-A8A1-87827733B0F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "..\UnitTestProject\UnitTestProject.csproj", "{94B217D5-F37D-472F-A67C-ABD53AB5FF74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrarVeterinario", "..\RegistrarVeterinario\RegistrarVeterinario.csproj", "{7B9FB20A-9DCE-43BF-8665-4CBECACD7BAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +31,17 @@ Global
 		{94B217D5-F37D-472F-A67C-ABD53AB5FF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94B217D5-F37D-472F-A67C-ABD53AB5FF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94B217D5-F37D-472F-A67C-ABD53AB5FF74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B9FB20A-9DCE-43BF-8665-4CBECACD7BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9FB20A-9DCE-43BF-8665-4CBECACD7BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B9FB20A-9DCE-43BF-8665-4CBECACD7BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B9FB20A-9DCE-43BF-8665-4CBECACD7BAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{94B217D5-F37D-472F-A67C-ABD53AB5FF74} = {E478CCBC-3479-4F9D-A8A1-87827733B0F2}
+		{7B9FB20A-9DCE-43BF-8665-4CBECACD7BAE} = {E478CCBC-3479-4F9D-A8A1-87827733B0F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42C8F1B1-1FB1-47FF-AFF1-2F4F3B0357B8}
