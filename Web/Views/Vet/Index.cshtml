@@ -52,7 +52,7 @@
     {
 
         <h3>Citas confirmadas</h3>
-        <table class="table">
+        <table class="table" id="CitasConfirmadas">
             <tr>
                 <th>
                     Código
@@ -71,7 +71,7 @@
 
             @foreach (var item in Model.Appointments)
             {
-                <tr>
+                <tr id="RowAtender">
                     <td>
                         @Html.DisplayFor(modelItem => item.IdAppointment)
                     </td>
@@ -84,7 +84,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Pet.Fullname)
                     </td>
-                    <td>
+                    <td id="Atender" >
                         @Html.ActionLink("Atender", "Details", "Appointment", new { id = item.IdAppointment }, new { })
                     </td>
                 </tr>
