@@ -12,7 +12,7 @@ namespace UnitTestProject
         IWebDriver driver = new ChromeDriver();
 
         [TestMethod]
-        public void FlujoBasico()
+        public void FlujoNormal()
         {
             try
             {
@@ -24,31 +24,175 @@ namespace UnitTestProject
                 IWebElement input2 = driver.FindElement(By.Id("Password"));
                 input2.Clear();
                 input2.SendKeys("123456");
-            
-               IWebElement btnIniciaSesion = driver.FindElement(By.Id("btnIniciarSesion"));
-               btnIniciaSesion.Click();
-               Thread.Sleep(2000);
 
-            IWebElement opcion = driver.FindElement(By.XPath("//*[@id=\"table:CitasConfirmadas\"]/tr[1]/td[4]/a"));
-            opcion.Click();
-            Thread.Sleep(2000);
+                IWebElement btnIniciaSesion = driver.FindElement(By.Id("btnIniciarSesion"));
+                btnIniciaSesion.Click();
+                Thread.Sleep(2000);
+
+                IWebElement opcion = driver.FindElement(By.Id("Atender"));
+                opcion.Click();
+                Thread.Sleep(2000);
+
+                IWebElement opcion2 = driver.FindElement(By.Id("btnRegistrarAtencion"));
+                opcion2.Click();
+                Thread.Sleep(2000);
 
 
-            //    IWebElement btnNuevo = driver.FindElement(By.Id("btnNuevo"));
-            //    btnNuevo.Click();
+                IWebElement input3 = driver.FindElement(By.Id("ClinicalSign"));
+                input3.Clear();
+                input3.SendKeys("Dolor de Pata");
+                Thread.Sleep(500);
 
-            //    IWebElement input3 = driver.FindElement(By.Id("txtNombre"));
-            //    input3.Clear();
-            //    input3.SendKeys("Categoria Prueba");
-            //    Thread.Sleep(2000);
+                IWebElement input4 = driver.FindElement(By.Id("Anamnesis"));
+                input4.Clear();
+                input4.SendKeys("¿Qué síntomas presenta?");
+                Thread.Sleep(500);
 
-            //    IWebElement btnGuardar = driver.FindElement(By.Id("btnGuardar"));
-            //    btnGuardar.Click();
-            //    Thread.Sleep(2000);
+                IWebElement input5 = driver.FindElement(By.Id("Diagnostic"));
+                input5.Clear();
+                input5.SendKeys("Pata Rota");
+                Thread.Sleep(500);
 
-            //    string mensajeObtenido = driver.FindElement(By.Id("messages")).Text;
-            //    Assert.AreEqual(mensajeEsperado, mensajeObtenido);
-            //    driver.Close();
+                IWebElement input6 = driver.FindElement(By.Id("Treatment"));
+                input6.Clear();
+                input6.SendKeys("Operación, reposo y medicación");
+                Thread.Sleep(500);
+
+                IWebElement input7 = driver.FindElement(By.Id("Observations"));
+                input7.Clear();
+                input7.SendKeys("No Presenta");
+                Thread.Sleep(500);
+
+                IWebElement opcion3 = driver.FindElement(By.Id("btnGuardar"));
+                opcion3.Click();
+                Thread.Sleep(2000);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+
+            }
+        }
+
+        [TestMethod]
+        public void FlujoAlternativo01()
+        {
+            try
+            {
+                driver.Navigate().GoToUrl("http://petprojectwebapp.azurewebsites.net/User/Login");
+
+                IWebElement input1 = driver.FindElement(By.Id("Email"));
+                input1.Clear();
+                input1.SendKeys("ramon@mail.com");
+                IWebElement input2 = driver.FindElement(By.Id("Password"));
+                input2.Clear();
+                input2.SendKeys("123456");
+
+                IWebElement btnIniciaSesion = driver.FindElement(By.Id("btnIniciarSesion"));
+                btnIniciaSesion.Click();
+                Thread.Sleep(2000);
+
+                IWebElement opcion = driver.FindElement(By.Id("Atender"));
+                opcion.Click();
+                Thread.Sleep(2000);
+
+                IWebElement opcion2 = driver.FindElement(By.Id("btnRegistrarAtencion"));
+                opcion2.Click();
+                Thread.Sleep(2000);
+
+
+                IWebElement input3 = driver.FindElement(By.Id("ClinicalSign"));
+                input3.Clear();
+                input3.SendKeys("Dolor de Pata");
+                Thread.Sleep(500);
+
+                IWebElement input4 = driver.FindElement(By.Id("Anamnesis"));
+                input4.Clear();
+                input4.SendKeys("¿Qué síntomas presenta?");
+                Thread.Sleep(500);
+
+                //IWebElement input5 = driver.FindElement(By.Id("Diagnostic"));
+                //input5.Clear();
+                //input5.SendKeys("Pata Rota");
+                //Thread.Sleep(500);
+
+                IWebElement input6 = driver.FindElement(By.Id("Treatment"));
+                input6.Clear();
+                input6.SendKeys("Operación, reposo y medicación");
+                Thread.Sleep(500);
+
+                IWebElement input7 = driver.FindElement(By.Id("Observations"));
+                input7.Clear();
+                input7.SendKeys("No Presenta");
+                Thread.Sleep(500);
+
+                IWebElement opcion3 = driver.FindElement(By.Id("btnGuardar"));
+                opcion3.Click();
+                Thread.Sleep(2000);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+
+            }
+        }
+
+        [TestMethod]
+        public void FlujoAlternativo02()
+        {
+            try
+            {
+                driver.Navigate().GoToUrl("http://petprojectwebapp.azurewebsites.net/User/Login");
+
+                IWebElement input1 = driver.FindElement(By.Id("Email"));
+                input1.Clear();
+                input1.SendKeys("ramon@mail.com");
+                IWebElement input2 = driver.FindElement(By.Id("Password"));
+                input2.Clear();
+                input2.SendKeys("123456");
+
+                IWebElement btnIniciaSesion = driver.FindElement(By.Id("btnIniciarSesion"));
+                btnIniciaSesion.Click();
+                Thread.Sleep(2000);
+
+                IWebElement opcion = driver.FindElement(By.Id("Atender"));
+                opcion.Click();
+                Thread.Sleep(2000);
+
+                IWebElement opcion2 = driver.FindElement(By.Id("btnRegistrarAtencion"));
+                opcion2.Click();
+                Thread.Sleep(2000);
+
+
+                IWebElement input3 = driver.FindElement(By.Id("ClinicalSign"));
+                input3.Clear();
+                input3.SendKeys("Dolor de Pata");
+                Thread.Sleep(500);
+
+                IWebElement input4 = driver.FindElement(By.Id("Anamnesis"));
+                input4.Clear();
+                input4.SendKeys("¿Qué síntomas presenta?");
+                Thread.Sleep(500);
+
+                IWebElement input5 = driver.FindElement(By.Id("Diagnostic"));
+                input5.Clear();
+                input5.SendKeys("Pata Rota");
+                Thread.Sleep(500);
+
+                IWebElement input6 = driver.FindElement(By.Id("Treatment"));
+                input6.Clear();
+                input6.SendKeys("Operación, reposo y medicación");
+                Thread.Sleep(500);
+
+                IWebElement input7 = driver.FindElement(By.Id("Observations"));
+                input7.Clear();
+                input7.SendKeys("No Presenta");
+                Thread.Sleep(500);
+
+                IWebElement opcion3 = driver.FindElement(By.Id("Regresar"));
+                opcion3.Click();
+                Thread.Sleep(2000);
+
             }
             catch (Exception e)
             {
