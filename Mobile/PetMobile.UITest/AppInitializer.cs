@@ -28,7 +28,6 @@ namespace PetMobile.UITest
                 app = ConfigureApp
                         .Android
                         .Debug()
-                        .ApkFile(apkFilePath)
                         .StartApp();
             }
             else

@@ -50,6 +50,13 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CustomCommands>
+      <CustomCommands>
+        <Command>
+          <type>Build</type>
+        </Command>
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -186,7 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PetMobile\PetMobile.csproj">
-      <Project>{420ede4f-e490-4225-b871-81e5975cfbcc}</Project>
+      <Project>{56E79390-336D-4CCC-8C7B-B1FC15269F23}</Project>
       <Name>PetMobile</Name>
     </ProjectReference>
   </ItemGroup>
