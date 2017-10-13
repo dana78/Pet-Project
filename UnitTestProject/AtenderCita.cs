@@ -66,6 +66,9 @@ namespace UnitTestProject
                 IWebElement opcion3 = driver.FindElement(By.Id("btnGuardar"));
                 opcion3.Click();
                 Thread.Sleep(2000);
+
+
+
             }
             catch (Exception e)
             {
