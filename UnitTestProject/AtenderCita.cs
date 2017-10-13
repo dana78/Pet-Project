@@ -65,7 +65,8 @@ namespace UnitTestProject
 
                 IWebElement opcion3 = driver.FindElement(By.Id("btnGuardar"));
                 opcion3.Click();
-                
+                driver.Close();
+
             }
             catch (Exception e)
             {
@@ -128,7 +129,9 @@ namespace UnitTestProject
 
                 IWebElement opcion3 = driver.FindElement(By.Id("btnGuardar"));
                 opcion3.Click();
-                
+                Thread.Sleep(500);
+                driver.Close();
+
             }
             catch (Exception e)
             {
@@ -191,7 +194,9 @@ namespace UnitTestProject
 
                 IWebElement opcion3 = driver.FindElement(By.Id("Regresar"));
                 opcion3.Click();
-               
+                Thread.Sleep(500);
+                driver.Close();
+
 
             }
             catch (Exception e)
