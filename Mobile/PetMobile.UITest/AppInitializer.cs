@@ -8,7 +8,7 @@ namespace PetMobile.UITest
 {
     public class AppInitializer
     {
-        const string apkFilePath = @"../../../PetMobile.Android/bin/Debug/PetMobile.Android-Signed.apk";
+        const string apkFilePath = @"D:\Projects\Pet Project\Mobile\PetMobile.Android\bin\Debug\PetMobile.Android-Signed.apk";
 
         private static IApp app;
         public static IApp App
@@ -28,6 +28,7 @@ namespace PetMobile.UITest
                 app = ConfigureApp
                         .Android
                         .Debug()
+                        .ApkFile(apkFilePath)
                         .StartApp();
             }
             else

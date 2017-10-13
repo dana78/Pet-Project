@@ -29,11 +29,6 @@ namespace PetMobile.Droid.Renderers
                 var field = memberInfo.GetField(nameof(_toolbar), BindingFlags.Instance | BindingFlags.NonPublic);
                 _toolbar = field.GetValue(this) as AToolbar;
                 _toolbar.SetBackgroundColor(Color.Transparent.ToAndroid());
-
-                Activity context = Context as Activity;
-                var window = context.Window;
-                window.AddFlags(WindowManagerFlags.TranslucentStatus);
-                context.Window.ClearFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
             }
         }
 
@@ -47,7 +42,7 @@ namespace PetMobile.Droid.Renderers
             {
                 if (navigationPage.CurrentPage.GetType() != typeof(PetProfilePage))
                 {
-                    base.OnLayout(changed, l, t + ActionBarHeight(), r, b + ActionBarHeight());                    
+                    base.OnLayout(changed, l, t + ActionBarHeight(), r, b + ActionBarHeight());
                 }
             }
             else

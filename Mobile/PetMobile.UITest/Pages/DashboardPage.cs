@@ -9,5 +9,11 @@
             app.Tap(x => x.Text("Techie Escobar"));
             app.Tap(NewAppointmentButton);
         }
+
+        public void SelectToolbarItem()
+        {
+            app.Tap(x => x.Marked("More options"));
+            app.Tap(x => x.Id("title"));
+        }
     }
 }
