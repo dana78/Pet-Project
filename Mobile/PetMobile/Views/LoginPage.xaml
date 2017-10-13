@@ -1,35 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PetMobile"
              x:Class="PetMobile.Views.LoginPage">
-
-    <StackLayout Padding="12" VerticalOptions="Center">
-        <Image Source="logo.png"/>
-        <Entry x:Name="EmailEntry"
-               AutomationId="EmailEntry"
-               Text="{Binding Credentials.Email}" 
-               Placeholder="Correo electrónico"
-               Margin="0,8,0,0"/>
-        <Entry Text="{Binding Credentials.Password}" 
-               AutomationId="PasswordEntry"
-               Placeholder="Contraseña" 
-               IsPassword="True"/>
-        <Button Text="Ingresar"
-                TextColor="White"
-                AutomationId="LoginButton"
-                Command="{Binding LoginCommand}"
-                BackgroundColor="{StaticResource colorPrimaryDark}"/>
-        <ActivityIndicator IsRunning="{Binding IsBusy}" 
-                           IsVisible="{Binding IsBusy}" 
-                           HorizontalOptions="Center"/>
-        <Label Text="¿Eres nuevo aquí?" 
-               HorizontalTextAlignment="Center" />
-        <Label x:Name="RegisterLabel" 
-               Text="Regístrate"
-               FontAttributes="Bold"
-               TextColor="{StaticResource colorAccent}"
-               HorizontalTextAlignment="Center"/>
-    </StackLayout>
-
+    <ScrollView>
+        <StackLayout Padding="12" VerticalOptions="Center">
+            <Image Source="logo.png"/>
+            <Entry x:Name="EmailEntry"
+                   AutomationId="EmailEntry"
+                   Keyboard="Email"
+                   Text="{Binding Credentials.Email}" 
+                   Placeholder="Correo electrónico"
+                   Margin="0,8,0,0"/>
+            <Entry Text="{Binding Credentials.Password}" 
+                   AutomationId="PasswordEntry"
+                   Placeholder="Contraseña" 
+                   IsPassword="True"/>
+            <Button Text="Ingresar"
+                    TextColor="White"
+                    AutomationId="LoginButton"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="{StaticResource colorPrimaryDark}"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}" 
+                               HorizontalOptions="Center"/>
+            <Label Text="¿Eres nuevo aquí?" 
+                   HorizontalTextAlignment="Center" />
+            <Label x:Name="RegisterLabel" 
+                   Text="Regístrate"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource colorAccent}"
+                   HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
