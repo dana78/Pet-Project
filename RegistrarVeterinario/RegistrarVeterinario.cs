@@ -25,7 +25,7 @@ namespace RegistrarVeterinario
 
                 IWebElement input2 = driver.FindElement(By.Id("Lastname"));
                 input2.Clear();
-                input2.SendKeys("Ramon");
+                input2.SendKeys("Diaz Sevilla");
 
                 IWebElement input3 = driver.FindElement(By.Id("RUC"));
                 input3.Clear();
@@ -65,13 +65,14 @@ namespace RegistrarVeterinario
             }
 
         }
-        /*
+        
         [TestMethod]
         public void registrarVeterinario_FlujoAlternativo1()
         {
             try
             {
-                /*"Datos mal ingresados"
+                //"Datos mal ingresados"-->
+
                 driver.Navigate().GoToUrl("http://petprojectwebapp.azurewebsites.net/User/Register");
 
                 IWebElement input1 = driver.FindElement(By.Name("Firstname"));
@@ -80,23 +81,23 @@ namespace RegistrarVeterinario
 
                 IWebElement input2 = driver.FindElement(By.Name("Lastname"));
                 input2.Clear();
-                input2.SendKeys("Ramon");
+                input2.SendKeys("Diaz Sevilla");
 
                 IWebElement input3 = driver.FindElement(By.Name("RUC"));
                 input3.Clear();
-                input3.SendKeys("112233449");
+                input3.SendKeys("11223344910");
 
                 IWebElement input4 = driver.FindElement(By.Name("Phone"));
                 input4.Clear();
-                input4.SendKeys("938151132");
+                input4.SendKeys("9381511");
 
                 IWebElement input5 = driver.FindElement(By.Name("LicenseCode"));
                 input5.Clear();
-                input5.SendKeys("132");
+                input5.SendKeys("132897989");
 
                 IWebElement input6 = driver.FindElement(By.Name("LicenseDate"));
                 input6.Clear();
-                input6.SendKeys("25/05/12");
+                input6.SendKeys("25-05-12");
 
                 IWebElement input7 = driver.FindElement(By.Name("Email"));
                 input7.Clear();
@@ -104,7 +105,7 @@ namespace RegistrarVeterinario
 
                 IWebElement input8 = driver.FindElement(By.Name("Password"));
                 input8.Clear();
-                input8.SendKeys("ramon69@gmail.com");
+                input8.SendKeys("789987");
 
                 IWebElement btnRegistrar = driver.FindElement(By.Id("Register"));
                 btnRegistrar.Click();
@@ -119,14 +120,14 @@ namespace RegistrarVeterinario
 
             }
 
-        }*/
+        }
 
         [TestMethod]
         public void registrarVeterinario_FlujoAlternativo2()
         {
             try
             {
-                string mensajeEsperado = "Datos incompletos";
+                //Datos incompletos
                 driver.Navigate().GoToUrl("http://petprojectwebapp.azurewebsites.net/User/Register");
 
                 IWebElement input1 = driver.FindElement(By.Name("Firstname"));
@@ -175,7 +176,7 @@ namespace RegistrarVeterinario
             }
 
         }
-        
+
         /*
         [TestMethod]
         public void registrarVeterinario_FlujoBasico3()
@@ -191,7 +192,7 @@ namespace RegistrarVeterinario
 
                 IWebElement input2 = driver.FindElement(By.Name("Lastname"));
                 input2.Clear();
-                input2.SendKeys("Ramon");
+                input2.SendKeys("Diaz Sevilla");
 
                 IWebElement input3 = driver.FindElement(By.Name("RUC"));
                 input3.Clear();
@@ -215,7 +216,7 @@ namespace RegistrarVeterinario
 
                 IWebElement input8 = driver.FindElement(By.Name("Password"));
                 input8.Clear();
-                input8.SendKeys("123456");
+                input8.SendKeys("789987");
 
                 IWebElement btnRegistrar = driver.FindElement(By.Id("Register"));
                 btnRegistrar.Click();
@@ -235,5 +236,5 @@ namespace RegistrarVeterinario
 
     }
 
-    }
+}
 
