@@ -72,7 +72,7 @@ namespace PetMobile.ViewModels
             }
         }
 
-        private bool ValidateModel(out string message)
+        public bool ValidateModel(out string message)
         {
             message = string.Empty;
             bool isValid = true;

@@ -13,6 +13,7 @@ namespace PetMobile.UITest.Tests
 
         LoginPage loginPage;
         DashboardPage dashboardPage;
+        PetFormPage petFormPage;
 
         public RegisterNewPetTests(Platform platform)
         {
@@ -26,6 +27,7 @@ namespace PetMobile.UITest.Tests
 
             loginPage = new LoginPage();
             dashboardPage = new DashboardPage();
+            petFormPage = new PetFormPage();
 
             loginPage.Login();
         }
@@ -33,8 +35,43 @@ namespace PetMobile.UITest.Tests
         [Test]
         public void BasicFlow()
         {
-            //Clic en nueva mascota
+            //  Click new pet form
+            dashboardPage.SelectToolbarItem();
 
+            //  Fill all fields
+            petFormPage.FillName("Terry");
+            petFormPage.FillBreed();
+            petFormPage.ClickSend();
+
+            app.WaitForElement(x => x.Id("message"));
+            var result = app.Query("¡Excelente! Tu mascota ha sido registrada exitosamente.");
+            app.Screenshot("Registro exitoso");
+            Assert.NotZero(result.Length);
         }
+
+        [Test]
+        public void AlternativeFlow1()
+        {
+            dashboardPage.SelectToolbarItem();
+
+            petFormPage.FillBreed();
+            petFormPage.ClickSend();
+
+            app.WaitForElement(x => x.Id("message"));
+            var result = app.Query("Debes ponerle un nombre a tu mascota");
+            app.Screenshot("Mensaje de error de registro");
+            Assert.NotZero(result.Length);
+        }
+
+        [Test]
+        public void AlternativeFlow2()
+        {
+            dashboardPage.SelectToolbarItem();
+            app.WaitForElement("FormTitle");
+            app.Back();
+            app.WaitForElement("Inicio");
+            app.Screenshot("Regreso a dashboard");
+        }
+
     }
 }
