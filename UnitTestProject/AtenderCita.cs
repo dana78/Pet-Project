@@ -61,13 +61,11 @@ namespace UnitTestProject
                 IWebElement input7 = driver.FindElement(By.Id("Observations"));
                 input7.Clear();
                 input7.SendKeys("No Presenta");
-                Thread.Sleep(500);
+             
 
                 IWebElement opcion3 = driver.FindElement(By.Id("btnGuardar"));
                 opcion3.Click();
-                Thread.Sleep(2000);
-
-
+                driver.Close();
 
             }
             catch (Exception e)
@@ -127,11 +125,13 @@ namespace UnitTestProject
                 IWebElement input7 = driver.FindElement(By.Id("Observations"));
                 input7.Clear();
                 input7.SendKeys("No Presenta");
-                Thread.Sleep(500);
+                
 
                 IWebElement opcion3 = driver.FindElement(By.Id("btnGuardar"));
                 opcion3.Click();
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
+                driver.Close();
+
             }
             catch (Exception e)
             {
@@ -190,11 +190,13 @@ namespace UnitTestProject
                 IWebElement input7 = driver.FindElement(By.Id("Observations"));
                 input7.Clear();
                 input7.SendKeys("No Presenta");
-                Thread.Sleep(500);
+                
 
                 IWebElement opcion3 = driver.FindElement(By.Id("Regresar"));
                 opcion3.Click();
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
+                driver.Close();
+
 
             }
             catch (Exception e)
